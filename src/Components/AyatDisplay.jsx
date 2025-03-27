@@ -12,15 +12,16 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
   let [isloading, setloading] = useState(true);
   const [localLang, setlocalLang] = UsePersistedState("localLang", false);
   let [translate, setTranslate] = useState(localLang ? true : false);
+  const [displayedAyat, setDisplayedAyat] = useState(null); 
   console.log(localLang);
   
   console.log("AyatDisplay Component Render Howa");
 
   useEffect(() => {
-    setloading(true);
     // jaise he ayat server se ajaye to he loading true krna agr nahi aye to niche ka code excecute nahi krna
     if (!Ayat) return;
-
+    setloading(true);
+    setDisplayedAyat(Ayat);   
     let Timer = setTimeout(() => {
       setloading(false);
     }, 1000);
@@ -43,7 +44,7 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
 
   return (
     <>
-      {isloading ? (
+      {!displayedAyat || isloading ? (
         <>
           <div className="Ayat-div bg-white shadow-lg rounded-3 p-4 text-center w-100 mt-3">
             {/* Heart Icon Placeholder */}
@@ -90,7 +91,7 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
           </div>
         </>
       ) : (
-        <div className="Ayat-div fade-animation bg-white shadow-lg rounded-3 p-4 text-center w-100 mt-3">
+        <div className="Ayat-div fade-zoom-up-animation bg-white shadow-lg rounded-3 p-4 text-center w-100 mt-3">
           <div className="d-flex justify-content-between align-items-center mb-3">
             <FaHeart className="fs-1" />
 
@@ -99,24 +100,24 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
               className="form-select w-auto cursor fw-bold text-success border-2 shadow-sm"
               onChange={handleTranslate}
             >
-              <option value="" hidden selected disabled>
+              <option value="" hidden selected  disabled>
                 Translate
               </option>
 
-              <option value="English">English</option>
-              <option value="Urdu">Urdu</option>
+              <option value="English" disabled={translate ? true : false}>English</option>
+              <option value="Urdu" disabled={translate ? false : true}>Urdu</option>
             </select>
           </div>
           <div className="d-flex justify-content-center align-items-center gap-2 ">
-            <p className="fs-4 fw-bold text-success mb-0">{Ayat.para}</p>
-            <p className="fs-5 fw-semibold text-success mb-0">{Ayat.surah}</p>
+            <p className="fs-4 fw-bold text-success mb-0">{displayedAyat.para}</p>
+            <p className="fs-5 fw-semibold text-success mb-0">{displayedAyat.surah}</p>
           </div>
 
           <p
             style={{ fontFamily: "EB Garamond" }}
             className="ayat-show fs-2 fw-bold text-dark text-center mt-3"
           >
-            {Ayat.ayat}
+            {displayedAyat.ayat}
           </p>
 
           <p
@@ -128,13 +129,13 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
             className="translation  fw-semibold text-secondary mt-3  text-justify"
           >
             {translate && localLang
-              ? Ayat.translation_eng
-              : Ayat.translation_urdu}
+              ? displayedAyat.translation_eng
+              : displayedAyat.translation_urdu}
           </p>
 
           <div className="mt-4 ">
             <button
-              data-mood={Ayat.category}
+              data-mood={displayedAyat.category}
               id="nextayat"
               onClick={getRandomAyat}
               className=" btn btn-lg px-4 py-2 fw-bold shadow-sm w-100 mb-2"
