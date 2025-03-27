@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Displaycharater from "../Components/displaycharater";
 import MoodSelection from "../Components/MoodSelection";
 import AyatDisplay from "../Components/AyatDisplay";
@@ -9,23 +9,26 @@ const Home = () => {
   const filteredAyat = useSelector((store) => store.Ayats.Mood);
   const [randomAyat, setRandomAyat] = useState(null);
 
-  const getRandomAyat = () => {
-    // Selected Mood ke ayat agar hey  to newAyat variable me  os filterayat array me se kisi bhi aik index ke ayat store kara do first time me
-    if (filteredAyat.length > 0) {
+  console.log("Home Component Render Howa");
+  let getRandomAyat = useCallback(() => {
+    console.log("getRandomAyat function Render Howa");
+    if (filteredAyat && filteredAyat.length > 0) {
       let newAyat;
       do {
         newAyat = filteredAyat[Math.floor(Math.random() * filteredAyat.length)];
-        // (jb bhi loop chalta hey to newAyat varibale me aik random ayat store ho rahi hy or loop ko br br chalne ke liye wo ose newAyat ko (random ayat yani jo abhi display hey ) os se compare krta hye agr same hoti hey to he loop chalta hey or aik newAyat store krta hey )
-
-        //Agar false ho jaye to loop ko rok deta hy(yani display ayat or newayat agr barabr hey to  loop rok de ga taake same re render skip ho jaye (React) )
       } while (newAyat === randomAyat);
+      localStorage.setItem("previousAyat", JSON.stringify(newAyat));
 
       setRandomAyat(newAyat);
     }
-  };
-
+  }, [filteredAyat, randomAyat]);
   useEffect(() => {
-    getRandomAyat();
+    const savedAyat = JSON.parse(localStorage.getItem("previousAyat"));
+    if (savedAyat && filteredAyat.find(ayat => ayat.id === savedAyat.id)) {
+      setRandomAyat(savedAyat);
+    } else if (filteredAyat.length > 0) {
+      getRandomAyat();
+    }
   }, [filteredAyat]);
 
   const getStartedBtn = useRef(null);
@@ -51,18 +54,11 @@ const Home = () => {
       <Displaycharater scrollToTarget={scrollToTarget} />
       <MoodSelection ref={getStartedBtn} scrollToTarget2={scrollToTarget2} />
       <div id="aytsmooth" style={{ marginBottom: "65px" }}></div>
-      {randomAyat ? (
+
+      {randomAyat && (
         <AyatDisplay Ayat={randomAyat} getRandomAyat={getRandomAyat} />
-      ) : (
-        filteredAyat.map((ayat) => (
-          <AyatDisplay
-            ref={allMoodBtn}
-            Ayat={ayat}
-            key={ayat.id}
-            getRandomAyat={getRandomAyat}
-          />
-        ))
       )}
+
       <div>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta

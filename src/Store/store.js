@@ -1,3 +1,4 @@
+
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -7,7 +8,7 @@ const AyatSlice = createSlice({
   initialState: {
     // jo bhi mood select kr raha ho os mood ke tamam ayats is Mood ke array me store hoti hey or phr hum apne ayat Display waly components me is mood ke array ko accces kr ke is pr random ayat lagate hey
     Mood: [],
-    selectedAyat:[]
+    
    
   },
   reducers: {
@@ -18,10 +19,7 @@ const AyatSlice = createSlice({
       );
       state.Mood = filterAyatData;
     },
-    setSelectedAyat:(state,action)=>{
-      state.selectedAyat = action.payload;
-      console.log(state.selectedAyat)
-    }
+   
    
   },
 });

@@ -1,13 +1,20 @@
 import "@fontsource/eb-garamond"; // Quranic Look
 import "@fontsource/merriweather"; // English Translation
+import UsePersistedState from "../hooks/PersistesState";
 import React, { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 
-const AyatDisplay = ({ Ayat, getRandomAyat }) => {
+const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
+  
+
   const dispatch = useDispatch();
   let [isloading, setloading] = useState(true);
-  let [translate, setTranslate] = useState(false);
+  const [localLang, setlocalLang] = UsePersistedState("localLang", false);
+  let [translate, setTranslate] = useState(localLang ? true : false);
+  console.log(localLang);
+  
+  console.log("AyatDisplay Component Render Howa");
 
   useEffect(() => {
     setloading(true);
@@ -26,8 +33,11 @@ const AyatDisplay = ({ Ayat, getRandomAyat }) => {
 
     if (translateVal === "English") {
       setTranslate(true);
+
+      setlocalLang(true);
     } else {
       setTranslate(false);
+      setlocalLang(false);
     }
   };
 
@@ -117,7 +127,9 @@ const AyatDisplay = ({ Ayat, getRandomAyat }) => {
             }
             className="translation  fw-semibold text-secondary mt-3  text-justify"
           >
-            {translate ? Ayat.translation_eng : Ayat.translation_urdu}
+            {translate && localLang
+              ? Ayat.translation_eng
+              : Ayat.translation_urdu}
           </p>
 
           <div className="mt-4 ">
@@ -139,6 +151,6 @@ const AyatDisplay = ({ Ayat, getRandomAyat }) => {
       )}
     </>
   );
-};
+});
 
 export default AyatDisplay;
