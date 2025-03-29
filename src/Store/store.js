@@ -1,4 +1,3 @@
-
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -6,10 +5,8 @@ import Ayatdata from "../data/ayat";
 const AyatSlice = createSlice({
   name: "Ayats",
   initialState: {
-    // jo bhi mood select kr raha ho os mood ke tamam ayats is Mood ke array me store hoti hey or phr hum apne ayat Display waly components me is mood ke array ko accces kr ke is pr random ayat lagate hey
     Mood: [],
-    
-   
+    FavAyat: [],
   },
   reducers: {
     filterAyat: (state, action) => {
@@ -19,14 +16,21 @@ const AyatSlice = createSlice({
       );
       state.Mood = filterAyatData;
     },
-   
-   
+    addFavAyat: (state, action) => {
+      let LatestAyat = action.payload;
+      state.FavAyat = [...state.FavAyat, action.payload];
+    },
+    removeFavAyat: (state, action) => {
+      let removeAyat = action.payload;
+      state.FavAyat = state.FavAyat.filter((ayat) => ayat.id !== removeAyat.id);
+    },
   },
 });
 const persistConfig = {
   key: "root",
   storage,
   blacklist: ["Mood"],
+  whitelist: ["FavAyat"],
 };
 const persistedReducer = persistReducer(persistConfig, AyatSlice.reducer);
 const MoodBaseAyatStore = configureStore({
@@ -35,7 +39,7 @@ const MoodBaseAyatStore = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, 
+      serializableCheck: false,
     }),
 });
 export const AyatAction = AyatSlice.actions;

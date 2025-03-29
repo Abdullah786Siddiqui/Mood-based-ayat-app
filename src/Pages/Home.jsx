@@ -9,9 +9,7 @@ const Home = () => {
   const filteredAyat = useSelector((store) => store.Ayats.Mood);
   const [randomAyat, setRandomAyat] = useState(null);
 
-  console.log("Home Component Render Howa");
   let getRandomAyat = useCallback(() => {
-    console.log("getRandomAyat function Render Howa");
     if (filteredAyat && filteredAyat.length > 0) {
       let newAyat;
       do {
@@ -24,7 +22,7 @@ const Home = () => {
   }, [filteredAyat, randomAyat]);
   useEffect(() => {
     const savedAyat = JSON.parse(localStorage.getItem("previousAyat"));
-    if (savedAyat && filteredAyat.find(ayat => ayat.id === savedAyat.id)) {
+    if (savedAyat && filteredAyat.find((ayat) => ayat.id === savedAyat.id)) {
       setRandomAyat(savedAyat);
     } else if (filteredAyat.length > 0) {
       getRandomAyat();

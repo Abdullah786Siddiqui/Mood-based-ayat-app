@@ -1,27 +1,27 @@
 import "@fontsource/eb-garamond"; // Quranic Look
 import "@fontsource/merriweather"; // English Translation
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import UsePersistedState from "../hooks/PersistesState";
 import React, { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { AyatAction } from "../Store/store";
 
 const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
-  
-
-  const dispatch = useDispatch();
   let [isloading, setloading] = useState(true);
   const [localLang, setlocalLang] = UsePersistedState("localLang", false);
   let [translate, setTranslate] = useState(localLang ? true : false);
-  const [displayedAyat, setDisplayedAyat] = useState(null); 
-  console.log(localLang);
-  
-  console.log("AyatDisplay Component Render Howa");
+  const [displayedAyat, setDisplayedAyat] = useState(null);
+  let [heart, isHeart] = useState(false);
+
+  let dispatch = useDispatch();
 
   useEffect(() => {
     // jaise he ayat server se ajaye to he loading true krna agr nahi aye to niche ka code excecute nahi krna
     if (!Ayat) return;
     setloading(true);
-    setDisplayedAyat(Ayat);   
+    setDisplayedAyat(Ayat);
     let Timer = setTimeout(() => {
       setloading(false);
     }, 1000);
@@ -34,7 +34,6 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
 
     if (translateVal === "English") {
       setTranslate(true);
-
       setlocalLang(true);
     } else {
       setTranslate(false);
@@ -42,8 +41,27 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
     }
   };
 
+  const getFavAyat = useSelector((store) => store.Ayats.FavAyat) || [];
+  console.log(getFavAyat);
+
+  useEffect(() => {
+    if (displayedAyat) {
+      isHeart(getFavAyat.some((ayat) => ayat?.id === displayedAyat?.id));
+    }
+  }, [displayedAyat, getFavAyat]);
+
+  let handleFav = () => {
+    if (!heart) {
+      dispatch(AyatAction.addFavAyat(displayedAyat));
+      toast.success("Ayat added to Favorites!");
+    } else {
+      dispatch(AyatAction.removeFavAyat(displayedAyat));
+      toast.error("Ayat removed from Favorites!");
+    }
+  };
   return (
     <>
+      <ToastContainer />
       {!displayedAyat || isloading ? (
         <>
           <div className="Ayat-div bg-white shadow-lg rounded-3 p-4 text-center w-100 mt-3">
@@ -93,24 +111,37 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
       ) : (
         <div className="Ayat-div fade-zoom-up-animation bg-white shadow-lg rounded-3 p-4 text-center w-100 mt-3">
           <div className="d-flex justify-content-between align-items-center mb-3">
-            <FaHeart className="fs-1" />
+            <FaHeart
+              style={{ color: heart ? "red" : "gray" }}
+              className="fs-1 cursor"
+              onClick={handleFav}
+            />
 
             <select
               id="translate-option"
               className="form-select w-auto cursor fw-bold text-success border-2 shadow-sm"
               onChange={handleTranslate}
+              defaultValue=""
             >
-              <option value="" hidden selected  disabled>
+              <option value="" hidden disabled>
                 Translate
               </option>
 
-              <option value="English" disabled={translate ? true : false}>English</option>
-              <option value="Urdu" disabled={translate ? false : true}>Urdu</option>
+              <option value="English" disabled={translate ? true : false}>
+                English
+              </option>
+              <option value="Urdu" disabled={translate ? false : true}>
+                Urdu
+              </option>
             </select>
           </div>
           <div className="d-flex justify-content-center align-items-center gap-2 ">
-            <p className="fs-4 fw-bold text-success mb-0">{displayedAyat.para}</p>
-            <p className="fs-5 fw-semibold text-success mb-0">{displayedAyat.surah}</p>
+            <p className="fs-4 fw-bold text-success mb-0">
+              {displayedAyat.para}
+            </p>
+            <p className="fs-5 fw-semibold text-success mb-0">
+              {displayedAyat.surah}
+            </p>
           </div>
 
           <p
