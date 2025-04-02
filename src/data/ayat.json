@@ -272,6 +272,7 @@
     "translation_eng": "And ˹remember˺ when your Lord proclaimed, ‘If you are grateful, I will certainly give you more. But if you are ungrateful, surely My punishment is severe.’”",
     "translation_urdu": "اگر تم شکر ادا کرو گے تو میں تمہیں اور زیادہ دوں گا، اور اگر ناشکری کرو گے تو میرا عذاب سخت ہے۔"
   },
+
   {
     "id": 25,
     "category": "Anxious",
@@ -282,5 +283,82 @@
     "ayat": "إِنَّ مَعَ ٱلْعُسْرِ يُسْرًۭا",
     "translation_eng": "Indeed! With every hardship comes ease.",
     "translation_urdu": " ہر تکلیف کے بعد راحت ہے۔"
+  },
+  {
+    "id": 25,
+    "category": "Thankful",
+    "para": 16,
+    "Ayatno": 78,
+    "Surahno": 16,
+    "surah": "Al-Nahl",
+    "ayat":" وَٱللَّهُ أَخْرَجَكُم مِّنۢ بُطُونِ أُمَّهَـٰتِكُمْ لَا تَعْلَمُونَ شَيْـًۭٔا وَجَعَلَ لَكُمُ ٱلسَّمْعَ وَٱلْأَبْصَـٰرَ وَٱلْأَفْـِٔدَةَ ۙ لَعَلَّكُمْ تَشْكُرُونَ ٧٨",
+    "translation_eng": "And Allah brought you out of the wombs of your mothers while you knew nothing, and gave you hearing, sight, and intellect so perhaps you would be thankful.",
+    "translation_urdu": "اور اللہ نے تمہیں تمہاری ماؤں کے پیٹوں سے نکالا جبکہ تم کچھ نہیں جانتے تھے، اور اس نے تمہارے لیے کان، آنکھیں اور دل بنائے تاکہ تم شکر گزار بنو۔"
+  },
+  {
+    "id": 26,
+    "category": "Thankful",
+    "para": 21,
+    "Ayatno": 12,
+    "Surahno": 31,
+    "surah": "Al-Luqman",
+    "ayat":" وَلَقَدْ ءَاتَيْنَا لُقْمَـٰنَ ٱلْحِكْمَةَ أَنِ ٱشْكُرْ لِلَّهِ ۚ وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ ۖ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِىٌّ حَمِيدٌۭ ١٢",
+    "translation_eng": "Indeed, We blessed Luqman with wisdom, saying Be grateful to Allah, for whoever is grateful, it is only for their own good. And whoever is ungrateful, then surely Allah is Self-Sufficient, Praiseworthy.",
+    "translation_urdu": "اور بیشک ہم نے لقمان کو حکمت عطا کی کہ اللہ کا شکر ادا کرو، اور جو شکر ادا کرتا ہے وہ اپنے ہی فائدے کے لیے کرتا ہے، اور جو ناشکری کرتا ہے تو بیشک اللہ بے نیاز، خوبیوں والا ہے۔"
+  },
+  {
+    "id": 27,
+    "category": "Thankful",
+    "para": 23,
+    "Ayatno": 7,
+    "Surahno": 39,
+    "surah": "Az-Zumar",
+    "ayat":"إِن تَكْفُرُوا۟ فَإِنَّ ٱللَّهَ غَنِىٌّ عَنكُمْ ۖ وَلَا يَرْضَىٰ لِعِبَادِهِ ٱلْكُفْرَ ۖ وَإِن تَشْكُرُوا۟ يَرْضَهُ لَكُمْ ۗ",
+    "translation_eng": "If you disbelieve, indeed, Allah is free of need from you. And He is not pleased with ingratitude for His servants. But if you are grateful, He approves it for you.",
+    "translation_urdu": "اگر تم ناشکری کرو تو بیشک اللہ تم سے بے نیاز ہے اور وہ اپنے بندوں کے لیے ناشکری پسند نہیں کرتا، اور اگر تم شکر ادا کرو تو اسے تمہارے لیے پسند فرماتا ہے۔" 
+  },
+  {
+    "id": 28,
+    "category": "Thankful",
+    "para": 18,
+    "Ayatno": 62,
+    "Surahno": 25,
+    "surah": "Al-Furqan",
+    "ayat":"وَهُوَ ٱلَّذِى جَعَلَ ٱلَّيْلَ وَٱلنَّهَارَ خِلْفَةًۭ لِّمَنْ أَرَادَ أَن يَذَّكَّرَ أَوْ أَرَادَ شُكُورًۭا ٦٢",
+    "translation_eng": "And He is the One Who causes the day and the night to alternate, ˹as a sign˺ for whoever desires to be mindful or to be grateful.",
+    "translation_urdu": "اور وہی ہے جس نے رات اور دن کو ایک دوسرے کا جانشین بنایا، ہر اس شخص کے لیے جو نصیحت حاصل کرنا چاہے یا شکر گزار بننا چاہے۔"
+  },
+  {
+    "id": 29,
+    "category": "Thankful",
+    "para": 4,
+    "Ayatno": 144,
+    "Surahno": 3,
+    "surah": "Al-Imran",
+    "ayat":"وَسَيَجْزِى ٱللَّهُ ٱلشَّٰكِرِينَ۔",
+    "translation_eng": "And Allah will reward the grateful.",
+    "translation_urdu": "اور اللہ شکر گزاروں کو جزا دے گا۔"
+  },
+  {
+    "id": 30,
+    "category": "Thankful",
+    "para": 4,
+    "Ayatno": 147,
+    "Surahno": 4,
+    "surah": "An-Nisa ",
+    "ayat":"مَّا يَفْعَلُ ٱللَّهُ بِعَذَابِكُمْ إِن شَكَرْتُمْ وَءَامَنتُمْ ۚ وَكَانَ ٱللَّهُ شَاكِرًا عَلِيمًۭا ١٤٧",
+    "translation_eng": "Why should Allah punish you if you are grateful and faithful? Allah is ever Appreciative, All-Knowing.",
+    "translation_urdu": "اللہ تمہیں عذاب دے کر کیا کرے گا اگر تم شکر گزار بن جاؤ اور ایمان لے آؤ؟ اور اللہ قدر دان ہے اور سب کچھ جاننے والا ہے۔"
+  },
+  {
+    "id": 31,
+    "category": "Thankful",
+    "para": 1,
+    "Ayatno": 172,
+    "Surahno": 1,
+    "surah": "Al-Baqarah",
+    "ayat":"يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُلُوا۟ مِن طَيِّبَـٰتِ مَا رَزَقْنَـٰكُمْ وَٱشْكُرُوا۟ لِلَّهِ إِن كُنتُمْ إِيَّاهُ تَعْبُدُونَ ١٧٢",
+    "translation_eng": "O believers! Eat from the good things We have provided for you. And give thanks to Allah if you   truly worship Him alone.",
+    "translation_urdu": "اے ایمان والو !جو پاکیزہ چیزیں ہم نے تمہیں دے رکھی ہیں انہیں کھاؤ ، پیو اور اللہ تعالٰی کا شکر کرو ، اگر تم خاص اسی کی  عبادت  کرتے ہو ۔"
   }
 ]

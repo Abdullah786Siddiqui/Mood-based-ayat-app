@@ -1,3 +1,17 @@
+
+/* @import url('https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap'); */
+
+@import url('https://fonts.qurancomplex.gov.sa/uthmanic_naskh?display=swap');
+
+.quran-text {
+  font-family: 'Uthmanic Naskh', serif;
+  font-size: 24px;
+  direction: rtl;
+}
+
+
+
+
 body {
   font-family: 'Roboto', sans-serif !important;
   background-color: #f5f3ff;

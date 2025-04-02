@@ -3,12 +3,12 @@ import "@fontsource/merriweather"; // English Translation
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UsePersistedState from "../hooks/PersistesState";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { AyatAction } from "../Store/store";
 
-const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
+const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat }) => {
   let [isloading, setloading] = useState(true);
   const [localLang, setlocalLang] = UsePersistedState("localLang", false);
   let [translate, setTranslate] = useState(localLang ? true : false);
@@ -18,31 +18,37 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
   let dispatch = useDispatch();
 
   useEffect(() => {
-    // jaise he ayat server se ajaye to he loading true krna agr nahi aye to niche ka code excecute nahi krna
+    // if (FavoriteAyat) {
+    //   setDisplayedAyat(FavoriteAyat);
+    //   setloading(false);
+    //   return;
+    // }
     if (!Ayat) return;
     setloading(true);
     setDisplayedAyat(Ayat);
+
     let Timer = setTimeout(() => {
       setloading(false);
-    }, 1000);
-    // jb component unmount hoga to  timer bh reset ho jaye ga
+    }, 500);
     return () => clearTimeout(Timer);
-  }, [Ayat]);
+  }, [Ayat, FavoriteAyat]);
 
-  let handleTranslate = (e) => {
-    let translateVal = e.target.value;
+  const handleTranslate = useCallback(
+    (e) => {
+      let translateVal = e.target.value;
 
-    if (translateVal === "English") {
-      setTranslate(true);
-      setlocalLang(true);
-    } else {
-      setTranslate(false);
-      setlocalLang(false);
-    }
-  };
+      if (translateVal === "English") {
+        setTranslate(true);
+        setlocalLang(true);
+      } else {
+        setTranslate(false);
+        setlocalLang(false);
+      }
+    },
+    [setTranslate, setlocalLang]
+  );
 
-  const getFavAyat = useSelector((store) => store.Ayats.FavAyat) || [];
-  console.log(getFavAyat);
+  let getFavAyat = useSelector((store) => store.Ayats.FavAyat) || [];
 
   useEffect(() => {
     if (displayedAyat) {
@@ -50,15 +56,21 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
     }
   }, [displayedAyat, getFavAyat]);
 
-  let handleFav = () => {
+  let handleFav = (favAyat) => {
     if (!heart) {
-      dispatch(AyatAction.addFavAyat(displayedAyat));
+      dispatch(AyatAction.addFavAyat(favAyat));
       toast.success("Ayat added to Favorites!");
+      // FavoriteAyat ? null : toast.success("Ayat added to Favorites!");
     } else {
-      dispatch(AyatAction.removeFavAyat(displayedAyat));
+      dispatch(AyatAction.removeFavAyat(favAyat));
       toast.error("Ayat removed from Favorites!");
+      // FavoriteAyat ? null : toast.error("Ayat removed from Favorites!");
     }
   };
+
+  // let handleRemove = (ayat) => {
+  //   dispatch(AyatAction.removeFavAyat(ayat));
+  // };
   return (
     <>
       <ToastContainer />
@@ -114,7 +126,21 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
             <FaHeart
               style={{ color: heart ? "red" : "gray" }}
               className="fs-1 cursor"
-              onClick={handleFav}
+              onClick={() =>
+                handleFav({
+                  id: displayedAyat.id,
+                  ayat: displayedAyat.ayat,
+                  category: displayedAyat.category,
+                  Ayatno: displayedAyat.Ayatno,
+                  Surahno: displayedAyat.Surahno,
+                  surah: displayedAyat.surah,
+                  para: displayedAyat.para,
+                  translation:
+                    translate && localLang
+                      ? displayedAyat.translation_eng
+                      : displayedAyat.translation_urdu,
+                })
+              }
             />
 
             <select
@@ -145,8 +171,8 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
           </div>
 
           <p
-            style={{ fontFamily: "EB Garamond" }}
-            className="ayat-show fs-2 fw-bold text-dark text-center mt-3"
+            //  style={{ fontFamily: "'Scheherazade New', serif", fontSize: "24px", direction: "rtl" }}
+            className="ayat-show fs-2 fw-bold text-dark text-center mt-3 quran-text"
           >
             {displayedAyat.ayat}
           </p>
@@ -165,6 +191,20 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat }) => {
           </p>
 
           <div className="mt-4 ">
+            {/* {FavoriteAyat ? (
+              <button
+                onClick={() => handleRemove(FavoriteAyat)}
+                className="btn btn-lg px-4 py-2 fw-bold shadow-sm w-100 mb-2"
+                style={{
+                  background: "linear-gradient(to right, #ff0000, #ff7f7f)", // Red to light red gradient
+                  border: "none",
+                  borderRadius: "10px",
+                  color: "white",
+                }}
+              >
+                Remove
+              </button>
+            ) : ( */}
             <button
               data-mood={displayedAyat.category}
               id="nextayat"

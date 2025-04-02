@@ -43,7 +43,7 @@ const MoodSelection = ({ref , scrollToTarget2}) => {
           </div>
           <div className="col-6 col-lg-2 gallery-item cursor">
             <img
-              src="/public/Images/Thankfull.jpg"
+              src="/public/Images/Thankful.jpg"
               data-mood="Thankful"
               onClick={scrollToTarget2} 
               className="img-fluid gallery-img mood-btn shadow-lg"
