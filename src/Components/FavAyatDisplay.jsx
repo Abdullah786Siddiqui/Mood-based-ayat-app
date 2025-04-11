@@ -1,10 +1,13 @@
 import { FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { AyatAction } from "../Store/store";
-import { color } from "framer-motion";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
-const FavAyatDisplay = ({ favAyat }) => {
+const FavAyatDisplay = ({ favAyat , forceRerender }) => {
+  let getFavAyat = useSelector((store) => store.Ayats.FavAyat);
+  console.log(getFavAyat);
+  
+
   let [translation, setTranslation] = useState(true);
   let dispatch = useDispatch();
   useEffect(() => {
@@ -12,6 +15,10 @@ const FavAyatDisplay = ({ favAyat }) => {
       setTranslation(false);
     }
   }, [setTranslation]);
+
+  let delFAvAyat = (ayat) => {
+    dispatch(AyatAction.removeFavAyat(ayat));
+  }
 
   return (
     <div className="Ayat-div fade-zoom-up-animation bg-white shadow-lg rounded-3 p-4 text-center w-100 mt-3">

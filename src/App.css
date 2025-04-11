@@ -696,6 +696,17 @@ body,
 
 
 
+.modal.show {
+  display: block; /* Ensure the modal is shown when modalShow is true */
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust positioning to center modal */
+  z-index: 1050; /* Ensure the modal appears on top of content */
+}
+
+
+
 
   
   

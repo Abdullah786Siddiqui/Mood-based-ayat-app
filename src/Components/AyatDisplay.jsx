@@ -2,13 +2,15 @@ import "@fontsource/eb-garamond"; // Quranic Look
 import "@fontsource/merriweather"; // English Translation
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { HiDotsVertical } from "react-icons/hi";
 import UsePersistedState from "../hooks/PersistesState";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { AyatAction } from "../Store/store";
+import Skeleton from "./skeleton";
 
-const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat }) => {
+const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat,handleShow }) => {
   let [isloading, setloading] = useState(true);
   const [localLang, setlocalLang] = UsePersistedState("localLang", false);
   let [translate, setTranslate] = useState(localLang ? true : false);
@@ -68,158 +70,108 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat }) => {
     }
   };
 
-  // let handleRemove = (ayat) => {
-  //   dispatch(AyatAction.removeFavAyat(ayat));
-  // };
   return (
     <>
       <ToastContainer />
       {!displayedAyat || isloading ? (
-        <>
-          <div className="Ayat-div bg-white shadow-lg rounded-3 p-4 text-center w-100 mt-3">
-            {/* Heart Icon Placeholder */}
-            <div className="d-flex justify-content-end mb-3">
-              <div
-                className="skeleton skeleton-box"
-                style={{ width: "30px", height: "30px" }}
-              ></div>
-            </div>
-
-            {/* Surah & Para Placeholder */}
-            <div className="d-flex justify-content-center align-items-center gap-2">
-              <div
-                className="skeleton skeleton-text"
-                style={{ width: "50px", height: "20px" }}
-              ></div>
-              <div
-                className="skeleton skeleton-text"
-                style={{ width: "80px", height: "20px" }}
-              ></div>
-            </div>
-
-            {/* Ayat Placeholder */}
-            <div
-              className="skeleton skeleton-text"
-              style={{ height: "40px", width: "90%", margin: "10px auto" }}
-            ></div>
-            <div
-              className="skeleton skeleton-text"
-              style={{ height: "20px", width: "95%", margin: "5px auto" }}
-            ></div>
-            <div
-              className="skeleton skeleton-text"
-              style={{ height: "20px", width: "90%", margin: "5px auto" }}
-            ></div>
-
-            {/* Button Placeholder */}
-            <div className="mt-4">
-              <div
-                className="skeleton skeleton-button"
-                style={{ height: "45px", width: "100%" }}
-              ></div>
-            </div>
-          </div>
-        </>
+        <Skeleton />
       ) : (
-        <div className="Ayat-div fade-zoom-up-animation bg-white shadow-lg rounded-3 p-4 text-center w-100 mt-3">
-          <div className="d-flex justify-content-between align-items-center mb-3">
-            <FaHeart
-              style={{ color: heart ? "red" : "gray" }}
-              className="fs-1 cursor"
-              onClick={() =>
-                handleFav({
-                  id: displayedAyat.id,
-                  ayat: displayedAyat.ayat,
-                  category: displayedAyat.category,
-                  Ayatno: displayedAyat.Ayatno,
-                  Surahno: displayedAyat.Surahno,
-                  surah: displayedAyat.surah,
-                  para: displayedAyat.para,
-                  translation:
-                    translate && localLang
-                      ? displayedAyat.translation_eng
-                      : displayedAyat.translation_urdu,
-                })
+        <>
+          <div className="Ayat-div fade-zoom-up-animation bg-white shadow-lg rounded-3 p-4 px-3 text-center w-100 mt-3">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <div className="d-flex align-items-center gap-1 ">
+                <div
+                  className="text-muted cursor  "
+                  onClick={handleShow}
+                   variant="primary"
+                >
+                  <HiDotsVertical className="fs-1 " />
+                </div>
+
+                <FaHeart
+                  style={{ color: heart ? "red" : "gray" }}
+                  className="fs-1  cursor"
+                  onClick={() =>
+                    handleFav({
+                      id: displayedAyat.id,
+                      ayat: displayedAyat.ayat,
+                      category: displayedAyat.category,
+                      Ayatno: displayedAyat.Ayatno,
+                      Surahno: displayedAyat.Surahno,
+                      surah: displayedAyat.surah,
+                      para: displayedAyat.para,
+                      translation:
+                        translate && localLang
+                          ? displayedAyat.translation_eng
+                          : displayedAyat.translation_urdu,
+                    })
+                  }
+                />
+              </div>
+
+              <select
+                id="translate-option"
+                className="form-select w-auto cursor fw-bold text-success border-2 shadow-sm"
+                onChange={handleTranslate}
+                defaultValue=""
+              >
+                <option value="" hidden disabled>
+                  Translate
+                </option>
+                <option value="English" disabled={translate ? true : false}>
+                  English
+                </option>
+                <option value="Urdu" disabled={translate ? false : true}>
+                  Urdu
+                </option>
+              </select>
+            </div>
+           
+
+            <div className="d-flex justify-content-center align-items-center gap-2 ">
+              <p className="fs-4 fw-bold text-success mb-0">
+                {displayedAyat.para}
+              </p>
+              <p className="fs-5 fw-semibold text-success mb-0">
+                {displayedAyat.surah}
+              </p>
+            </div>
+
+            <p className="ayat-show fs-2 fw-bold text-dark text-center mt-3 quran-text">
+              {displayedAyat.ayat}
+            </p>
+
+            <p
+              style={
+                translate
+                  ? { fontFamily: "Merriweather", fontSize: "1.30rem" }
+                  : { fontFamily: "Jameel Nastaliq", fontSize: "1.75rem" }
               }
-            />
-
-            <select
-              id="translate-option"
-              className="form-select w-auto cursor fw-bold text-success border-2 shadow-sm"
-              onChange={handleTranslate}
-              defaultValue=""
+              className="translation fw-semibold text-secondary mt-3 text-justify"
             >
-              <option value="" hidden disabled>
-                Translate
-              </option>
-
-              <option value="English" disabled={translate ? true : false}>
-                English
-              </option>
-              <option value="Urdu" disabled={translate ? false : true}>
-                Urdu
-              </option>
-            </select>
-          </div>
-          <div className="d-flex justify-content-center align-items-center gap-2 ">
-            <p className="fs-4 fw-bold text-success mb-0">
-              {displayedAyat.para}
+              {translate && localLang
+                ? displayedAyat.translation_eng
+                : displayedAyat.translation_urdu}
             </p>
-            <p className="fs-5 fw-semibold text-success mb-0">
-              {displayedAyat.surah}
-            </p>
-          </div>
 
-          <p
-            //  style={{ fontFamily: "'Scheherazade New', serif", fontSize: "24px", direction: "rtl" }}
-            className="ayat-show fs-2 fw-bold text-dark text-center mt-3 quran-text"
-          >
-            {displayedAyat.ayat}
-          </p>
-
-          <p
-            style={
-              translate
-                ? { fontFamily: "Merriweather", fontSize: "1.30rem" }
-                : { fontFamily: "Jameel Nastaliq", fontSize: "1.75rem" }
-            }
-            className="translation  fw-semibold text-secondary mt-3  text-justify"
-          >
-            {translate && localLang
-              ? displayedAyat.translation_eng
-              : displayedAyat.translation_urdu}
-          </p>
-
-          <div className="mt-4 ">
-            {/* {FavoriteAyat ? (
+            <div className="mt-4">
               <button
-                onClick={() => handleRemove(FavoriteAyat)}
+                data-mood={displayedAyat.category}
+                id="nextayat"
+                onClick={getRandomAyat}
                 className="btn btn-lg px-4 py-2 fw-bold shadow-sm w-100 mb-2"
                 style={{
-                  background: "linear-gradient(to right, #ff0000, #ff7f7f)", // Red to light red gradient
+                  background: "linear-gradient(to right, #4b0082, #9370db)",
                   border: "none",
                   borderRadius: "10px",
-                  color: "white",
                 }}
               >
-                Remove
+                New Ayah
               </button>
-            ) : ( */}
-            <button
-              data-mood={displayedAyat.category}
-              id="nextayat"
-              onClick={getRandomAyat}
-              className=" btn btn-lg px-4 py-2 fw-bold shadow-sm w-100 mb-2"
-              style={{
-                background: " linear-gradient(to right, #4b0082, #9370db)",
-                border: "none",
-                borderRadius: "10px",
-              }}
-            >
-              New Ayah
-            </button>
+            </div>
+          
           </div>
-        </div>
+        </>
       )}
     </>
   );

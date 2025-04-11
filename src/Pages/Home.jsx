@@ -3,11 +3,13 @@ import Displaycharater from "../Components/displaycharater";
 import MoodSelection from "../Components/MoodSelection";
 import AyatDisplay from "../Components/AyatDisplay";
 import { useSelector } from "react-redux";
+import ModalOption from "../Components/ModalOption";
 
 const Home = () => {
   // store se mood ke array ko acces kia
   const filteredAyat = useSelector((store) => store.Ayats.Mood);
   const [randomAyat, setRandomAyat] = useState(null);
+  const [show, setShow] = useState(false);
 
   let getRandomAyat = useCallback(() => {
     if (filteredAyat && filteredAyat.length > 0) {
@@ -46,15 +48,23 @@ const Home = () => {
       targetElement.scrollIntoView({ behavior: "smooth" });
     }
   };
+  const handleShow = () => setShow(true);
 
   return (
     <>
       <Displaycharater scrollToTarget={scrollToTarget} />
       <MoodSelection ref={getStartedBtn} scrollToTarget2={scrollToTarget2} />
+      {show ? (
+        <ModalOption show={show} setShow={setShow} Ayat={randomAyat} />
+      ) : null}
       <div id="aytsmooth" style={{ marginBottom: "65px" }}></div>
 
       {randomAyat && (
-        <AyatDisplay Ayat={randomAyat} getRandomAyat={getRandomAyat} />
+        <AyatDisplay
+          Ayat={randomAyat}
+          getRandomAyat={getRandomAyat}
+          handleShow={handleShow}
+        />
       )}
 
       <div>

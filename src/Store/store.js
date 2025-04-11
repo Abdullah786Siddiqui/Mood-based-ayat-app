@@ -7,6 +7,7 @@ const AyatSlice = createSlice({
   initialState: {
     Mood: [],
     FavAyat: [],
+    audioUrl :[]
   },
   reducers: {
     filterAyat: (state, action) => {
@@ -23,14 +24,15 @@ const AyatSlice = createSlice({
     removeFavAyat: (state, action) => {
       let removeAyat = action.payload;
       state.FavAyat = state.FavAyat.filter((ayat) => ayat.id !== removeAyat.id);
-    },
+    }
+  
   },
 });
 const persistConfig = {
   key: "root",
   storage,
   blacklist: ["Mood"],
-  whitelist: ["FavAyat"],
+  // whitelist: ["FavAyat"],
 };
 const persistedReducer = persistReducer(persistConfig, AyatSlice.reducer);
 const MoodBaseAyatStore = configureStore({
