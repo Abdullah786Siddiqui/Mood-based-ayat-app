@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import Displaycharater from "../Components/displaycharater";
-import MoodSelection from "../Components/MoodSelection";
-import AyatDisplay from "../Components/AyatDisplay";
+import Displaycharater from "../Home/displaycharater";
+import MoodSelection from "../Home/MoodSelection";
+import AyatDisplay from "../Home/AyatDisplay";
 import { useSelector } from "react-redux";
-import ModalOption from "../Components/ModalOption";
+import ModalOption from "../Home/ModalOption";
 
 const Home = () => {
   // store se mood ke array ko acces kia

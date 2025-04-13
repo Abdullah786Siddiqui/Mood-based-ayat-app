@@ -1,7 +1,5 @@
 import React from "react";
-
 const Displaycharater = ({ scrollToTarget }) => {
-
   return (
     <>
       <div className="container d-flex flex-column flex-md-row align-items-start justify-content-between text-center text-md-start">
@@ -14,13 +12,29 @@ const Displaycharater = ({ scrollToTarget }) => {
             you. Just choose your mood, and let the divine words bring clarity,
             comfort, and inspiration.
           </p>
-          <p className="cursor1 typewriter-animation ">What your Mood Today!</p>
-          <button
+          <div class="card border-0  ">
+            <div class="loader ">
+              <p >What your Mood Today!</p>
+              <div class="words" >
+                <span class="word">Happy</span>
+                <span class="word">Sad</span>
+                <span class="word">Anxious</span>
+                <span class="word">Thankfull</span>
+                <span class="word">Angry</span>
+              </div>
+            </div>
+          </div>
+
+          {/* <button
             style={{ color: "#6f2dbd" }}
-            onClick={scrollToTarget}
+         
             className="btn fw-bold  border border-1 px-2 "
             id="started"
           >
+          
+          </button> */}
+          <button class="btn p-sm-1 p-md-1 p-lg-1 mt-1" id="started" onClick={scrollToTarget}>
+            {" "}
             Get started
           </button>
         </div>

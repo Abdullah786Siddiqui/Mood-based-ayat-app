@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { AyatAction } from "../Store/store";
+import { AyatAction } from "../../Store/store";
 
 
 const MoodSelection = ({ref , scrollToTarget2}) => {

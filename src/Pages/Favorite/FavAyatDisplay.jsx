@@ -1,32 +1,31 @@
-import { FaHeart } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { AyatAction } from "../Store/store";
-import { use, useEffect, useState } from "react";
 
-const FavAyatDisplay = ({ favAyat , forceRerender }) => {
-  let getFavAyat = useSelector((store) => store.Ayats.FavAyat);
-  console.log(getFavAyat);
-  
-
+import {  useEffect, useState } from "react";
+import { HiDotsVertical } from "react-icons/hi";
+import { MdDelete } from "react-icons/md";
+const FavAyatDisplay = ({ favAyat, handleShow }) => {
   let [translation, setTranslation] = useState(true);
-  let dispatch = useDispatch();
+
   useEffect(() => {
     if (/[\u0600-\u06FF]/.test(favAyat.translation)) {
       setTranslation(false);
     }
   }, [setTranslation]);
 
-  let delFAvAyat = (ayat) => {
-    dispatch(AyatAction.removeFavAyat(ayat));
-  }
-
   return (
     <div className="Ayat-div fade-zoom-up-animation bg-white shadow-lg rounded-3 p-4 text-center w-100 mt-3">
       <div className="d-flex justify-content-between align-items-center mb-3"></div>
-      <div className="d-flex justify-content-center align-items-center gap-2 ">
-        <p className="fs-4 fw-bold text-success mb-0">{favAyat.para}</p>
-        <p className="fs-5 fw-semibold text-success mb-0">{favAyat.surah}</p>
+
+      <div className="d-flex justify-content-start align-items-center gap-1  ">
+        <HiDotsVertical
+          className="fs-1 cursor  "
+          onClick={() => handleModal()}
+        />
+
+        <MdDelete className="fs-1 cursor" onClick={() => handleShow(favAyat)} />
       </div>
+
+      <p className="fs-4 fw-bold text-success mb-0">{favAyat.para}</p>
+      <p className="fs-5 fw-semibold text-success mb-0">{favAyat.surah}</p>
 
       <p className="ayat-show fs-2 fw-bold text-dark text-center mt-3 quran-text">
         {favAyat.ayat}
@@ -43,7 +42,7 @@ const FavAyatDisplay = ({ favAyat , forceRerender }) => {
         {favAyat.translation}
       </p>
 
-      <div className="mt-4 ">
+      {/* <div className="mt-4 ">
         <button
           id="nextayat"
           className="btn btn-lg px-4 py-2 fw-bold shadow-sm w-100 mb-2"
@@ -51,12 +50,12 @@ const FavAyatDisplay = ({ favAyat , forceRerender }) => {
             background: " linear-gradient(to right, #ff0000, #ff7f7f)",
             border: "none",
             borderRadius: "10px",
+            color: "white"
           }}
-          onClick={() => delFAvAyat(favAyat)}
         >
           Remove
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

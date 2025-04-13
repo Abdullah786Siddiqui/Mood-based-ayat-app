@@ -1,19 +1,15 @@
-
 /* @import url('https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap'); */
 
-@import url('https://fonts.qurancomplex.gov.sa/uthmanic_naskh?display=swap');
+@import url("https://fonts.qurancomplex.gov.sa/uthmanic_naskh?display=swap");
 
 .quran-text {
-  font-family: 'Uthmanic Naskh', serif;
+  font-family: "Uthmanic Naskh", serif;
   font-size: 24px;
   direction: rtl;
 }
 
-
-
-
 body {
-  font-family: 'Roboto', sans-serif !important;
+  font-family: "Roboto", sans-serif !important;
   background-color: #f5f3ff;
   padding-top: 60px !important;
 }
@@ -97,7 +93,7 @@ html {
 
 .para {
   font-size: 16px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   color: #555;
 }
 
@@ -563,7 +559,7 @@ body,
   transform: translateY(-50%);
 }
 /* Animation */
-.typewriter-animation {
+/* .typewriter-animation {
   animation: typewriter 5s steps(50) 1s 1 normal both,
     blinkingCursor 500ms steps(50) infinite normal;
 }
@@ -582,7 +578,7 @@ body,
   to {
     border-right-color: transparent;
   }
-}
+} */
 
 .skeleton {
   background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
@@ -632,7 +628,6 @@ body,
   transform: translateY(0) scale(1);
 }
 
-
 .contify {
   height: 700px;
   min-height: 700px;
@@ -642,14 +637,14 @@ body,
   display: none !important; /* Default Bootstrap dropdown icon hatane ke liye */
 }
 .gallery-item img {
-  width: 100%;            /* Full width le le */
-  height: auto;           /* Height adjust ho */
-  aspect-ratio: 1 / 1;    /* Square ratio maintain ho */
-  object-fit: cover;      /* Stretch na ho, crop ho */
+  width: 100%; /* Full width le le */
+  height: auto; /* Height adjust ho */
+  aspect-ratio: 1 / 1; /* Square ratio maintain ho */
+  object-fit: cover; /* Stretch na ho, crop ho */
 }
 @font-face {
-  font-family: 'Jameel Nastaliq';
-  src: url("/Fonts/Jameel\ Noori\ Nastaleeq\ Regular.ttf") format('truetype');
+  font-family: "Jameel Nastaliq";
+  src: url("/Fonts/Jameel\ Noori\ Nastaleeq\ Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -659,9 +654,9 @@ body,
 }
 /* .section {
   scroll-margin-top: 80px; /* Navbar ki height jitna space */
-  html {
-    scroll-behavior: smooth;
-  }
+html {
+  scroll-behavior: smooth;
+}
 /*   
   .fade-animation {
     animation: fadeIn 0.5s ease-in-out;
@@ -678,7 +673,7 @@ body,
     }
   } */
 
-  /* Fade + Zoom Animation */
+/* Fade + Zoom Animation */
 @keyframes fadeZoomUp {
   0% {
     opacity: 0;
@@ -694,8 +689,6 @@ body,
   animation: fadeZoomUp 0.7s ease-out;
 }
 
-
-
 .modal.show {
   display: block; /* Ensure the modal is shown when modalShow is true */
   position: fixed;
@@ -707,6 +700,135 @@ body,
 
 
 
+/* From Uiverse.io by kennyotsu */ 
+.card {
+  /* color used to softly clip top and bottom of the .words container */
+  /* background-color: var(--bg-color);  */
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-top: -10px;
 
-  
-  
+  /* padding: 1rem 2rem; */
+  /* border-radius: 1.25rem; */
+ 
+}
+.loader {
+  text-align: center;
+  color: #666666;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 40px;
+  /* padding: 10px 10px; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* border-radius: 8px; */
+}
+
+.words {
+  overflow: hidden;
+  position: relative;
+}
+.words::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--bg-color) 10%,
+    transparent 30%,
+    transparent 70%,
+    var(--bg-color) 90%
+  );
+  z-index: 20;
+}
+
+.word {
+  display: block;
+  height: 100%;
+  padding-left: 6px;
+color: #6f2dbd;
+  animation: spin_4991 4s infinite;
+}
+
+@keyframes spin_4991 {
+  10% {
+    -webkit-transform: translateY(-102%);
+    transform: translateY(-102%);
+  }
+
+  25% {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+
+  35% {
+    -webkit-transform: translateY(-202%);
+    transform: translateY(-202%);
+  }
+
+  50% {
+    -webkit-transform: translateY(-200%);
+    transform: translateY(-200%);
+  }
+
+  60% {
+    -webkit-transform: translateY(-302%);
+    transform: translateY(-302%);
+  }
+
+  75% {
+    -webkit-transform: translateY(-300%);
+    transform: translateY(-300%);
+  }
+
+  85% {
+    -webkit-transform: translateY(-402%);
+    transform: translateY(-402%);
+  }
+
+  100% {
+    -webkit-transform: translateY(-400%);
+    transform: translateY(-400%);
+  }
+}
+
+/* From Uiverse.io by SujitAdroja */ 
+.btn {
+  color: #6f2dbd;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1.5px solid #b18bdd ;
+  /* padding: 10px 20px; */
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  background: transparent;
+  position: relative;
+  transition: all 1s;
+  overflow: hidden;
+}
+
+.btn:hover {
+  color: white;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0;
+  left: -40px;
+  transform: skewX(45deg);
+  background-color: purple;
+  z-index: -1;
+  transition: all 1s;
+}
+
+.btn:hover::before {
+  width: 160%;
+}

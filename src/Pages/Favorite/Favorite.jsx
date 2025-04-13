@@ -1,29 +1,59 @@
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import FavAyatDisplay from "../Components/FavAyatDisplay";
+import FavAyatDisplay from "../Favorite/FavAyatDisplay";
+import Confirmation from "../Favorite/Confirmation";
 
 const Favorite = () => {
   let getFavAyat = useSelector((store) => store.Ayats.FavAyat);
   let Category = ["Happiness", "Sad", "Anxious", "Thankful", "Angry"];
   let [selectedmood, setSelectedmood] = useState(null);
   let [favAyat, setFavAyat] = useState([]);
+  let [showConfirm, setshowConfirm] = useState(false);
 
   let passIdFun = (Category) => {
     let FavAyat = getFavAyat.filter((ayat) => ayat.category === Category);
     setFavAyat(FavAyat);
     setSelectedmood(Category);
   };
+  // let [show,modalshow]= useState(false)
+  // let handleModal = ()=>{
+  //   modalshow(true)
+  // }
+  let [deleteAyat, setDeleteAyat] = useState(null);
+  const handleShow = (favAyat) => {
+    setDeleteAyat(favAyat);
+    setshowConfirm(true);
+  };
+  const getStartedBtn1 = useRef(null);
 
- 
+  const scrollToTarget = () => {
+    if (getStartedBtn.current) {
+      getStartedBtn.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <main>
       <h1 style={{ color: " #6f2dbd" }} className="text-center mt-3">
         Your Favorite Ayat here
       </h1>
+      {/* {show && <ModalOption setShow={modalshow} />}   */}
+      {showConfirm ? (
+        <Confirmation
+          showConfirm={showConfirm}
+          setshowConfirm={setshowConfirm}
+          deleteAyat={deleteAyat}
+        />
+      ) : null}
 
       <div
         className="accordion accordion-flush border border-3 contify"
         id="accordionFlushExample"
+        onClick={scrollToTarget}
+        ref={getStartedBtn1}
       >
         {Category.map((mood, index) => {
           return (
@@ -50,11 +80,39 @@ const Favorite = () => {
                     alt="Happiness"
                     style={{ aspectRatio: " 1/1", maxWidth: "100px" }}
                   />
-
+                  {/* let Category = ["Happiness", "Sad", "Anxious", "Thankful", "Angry"]; */}
                   {/* Quote (Text Wrapping & Proper Spacing)  */}
                   <span className="fw-semibold flex-grow-1 text-muted">
-                    The happiest people don't have the best of everything, they
-                    make the best of everything.
+                    {mood === "Happiness" && (
+                      <p>
+                        The happiest people don't have the best of everything,
+                        they make the best of everything.
+                      </p>
+                    )}
+                    {mood === "Angry" && (
+                      <p>
+                        The Prophet (ﷺ) said, ‘The strong is not the one who
+                        overcomes others with strength, but the one who controls
+                        himself while angry.’ (Sahih al-Bukhari)
+                      </p>
+                    )}
+                    {mood === "Sad" && (
+                      <p>
+                        Do not lose hope, nor be sad. You will surely be
+                        victorious if you are true believers.
+                      </p>
+                    )}
+                    {mood === "Anxious" && (
+                      <p>
+                        Verily, in the remembrance of Allah do hearts find rest.
+                      </p>
+                    )}
+                    {mood === "Thankful" && (
+                      <p>
+                        If you are grateful, I will surely increase you (in
+                        blessings).
+                      </p>
+                    )}
                   </span>
                 </button>
               </h2>
@@ -66,13 +124,15 @@ const Favorite = () => {
                 <div className="accordion-body text-center">
                   {selectedmood === mood && favAyat.length > 0 ? (
                     favAyat.map((ayat) => (
-                      <FavAyatDisplay key={ayat.id} favAyat={ayat}  />
+                      <FavAyatDisplay
+                        key={ayat.id}
+                        favAyat={ayat}
+                        handleShow={handleShow}
+                      />
                     ))
-                  ) : (
-                    <p className="text-danger">
-                      No Ayat! found for this {mood}
-                    </p>
-                  )}
+                  ) : favAyat.length === 0 && selectedmood === mood ? (
+                    <p className="text-danger">No Ayat! found for {mood}</p>
+                  ) : null}
                 </div>
               </div>
             </div>

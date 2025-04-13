@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/Icons/logo.png"
 import { Link } from "react-router-dom";
+import Hamburger from 'hamburger-react'
+const Header = () => {
 
-const Navbar = () => {
-
- 
+  const [isOpen, setOpen] = useState(false)
   return (
     <header>
       {/* Navbar */}
@@ -26,23 +26,23 @@ const Navbar = () => {
           <button
             className="navbar-toggler collapsed"
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarsExample04"
+            onClick={() => setOpen(!isOpen)}
             aria-controls="navbarsExample04"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            <Hamburger toggled={isOpen} toggle={setOpen}  color="#4B0082"
+  />
           </button>
 
           <div
-            className="navbar-collapse collapse bg-light"
+             className={`navbar-collapse ${isOpen ? 'show' : 'collapse'} bg-light`}
             id="navbarsExample04"
           >
             {/* Navbar Links  */}
             <ul className="navbar-nav me-auto mb-2 gap-3 mb-md-0 pt-1 ms-3 ms-sm-0 mt-0">
               <li className="nav-item">
-                <Link to={"/"} className="nav-link text-black cta fw-bold cursor colour ">
+                <Link to={"/"} onClick={()=>setOpen(false)}  className="nav-link text-black cta fw-bold cursor colour ">
                   Home
                 </Link>
               </li>
@@ -50,17 +50,18 @@ const Navbar = () => {
                 <Link
                   className="nav-link cta text-black fw-bold cursor colour"
                   to={"about"}
+                  onClick={()=>setOpen(false)}
                 >
                   About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={"contact"} className="nav-link cta text-black fw-bold cursor colour ">
+                <Link to={"contact"} onClick={()=>setOpen(false)} className="nav-link cta text-black fw-bold cursor colour ">
                   Contact
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={"./favorite"} className="nav-link cta text-black fw-bold cursor colour">
+                <Link to={"./favorite"} onClick={()=>setOpen(false)} className="nav-link cta text-black fw-bold cursor colour">
                   Favorite
                 </Link>
               </li>
@@ -74,4 +75,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;

@@ -1,8 +1,7 @@
 import { FaPause, FaRegBookmark } from "react-icons/fa";
 import { LuShare2 } from "react-icons/lu";
 import { FaPlay } from "react-icons/fa";
-import { Modal, Button } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { Modal } from "react-bootstrap";
 import { useEffect, useRef, useState } from "react";
 
 const ModalOption = ({ show, setShow, Ayat }) => {
@@ -61,7 +60,6 @@ const ModalOption = ({ show, setShow, Ayat }) => {
           title: "Listen to this  beautiful Ayah",
           text: `${Ayat.ayat}\n\nListen here:`,
         });
-        console.log("Shared successfully");
       } catch (error) {
         console.log("Error sharing:", error);
       }
@@ -74,8 +72,10 @@ const ModalOption = ({ show, setShow, Ayat }) => {
     <Modal
       show={show}
       onHide={handleClose}
+      centered
       aria-labelledby="contained-modal-title-vcenter"
-      style={{ marginTop: "160px" }}
+      // style={{ marginTop: "230px" }}
+
     >
       <Modal.Header closeButton>
         <Modal.Title className="text-center w-100">Options</Modal.Title>
@@ -89,19 +89,19 @@ const ModalOption = ({ show, setShow, Ayat }) => {
           onClick={() => playAyat(Ayat.Surahno, Ayat.Ayatno)}
         >
           {playing ? (
-            <FaPause className="fs-1" />
+            <FaPause className="fs-1 cursor pause" />
           ) : !loadings ? (
-            <FaPlay className="fs-1" />
+            <FaPlay className="fs-1 cursor play"  />
           ) : (
             <div className="spinner-border "style={{ borderWidth: '4px' }} role="status">
             </div>
           )}
         </span>
         <span>
-          <FaRegBookmark />
+          <FaRegBookmark className="cursor" />
         </span>
         <span>
-          <LuShare2  onClick={handleShare} />
+          <LuShare2 className="cursor"  onClick={handleShare} />
         </span>
       </Modal.Body>
     </Modal>

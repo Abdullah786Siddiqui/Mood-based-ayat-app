@@ -3,12 +3,12 @@ import "@fontsource/merriweather"; // English Translation
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { HiDotsVertical } from "react-icons/hi";
-import UsePersistedState from "../hooks/PersistesState";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import UsePersistedState from "../../hooks/PersistesState";
+import React, { useCallback, useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { AyatAction } from "../Store/store";
-import Skeleton from "./skeleton";
+import { AyatAction } from "../../Store/store";
+import Skeleton from "../Home/skeleton";
 
 const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat,handleShow }) => {
   let [isloading, setloading] = useState(true);
@@ -137,7 +137,7 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat,handleShow }
               </p>
             </div>
 
-            <p className="ayat-show fs-2 fw-bold text-dark text-center mt-3 quran-text">
+            <p className="ayat-show fs-2 fw-bold text-dark text-center mt-3 ">
               {displayedAyat.ayat}
             </p>
 
@@ -157,16 +157,16 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat,handleShow }
             <div className="mt-4">
               <button
                 data-mood={displayedAyat.category}
-                id="nextayat"
+                // id="nextayat"
                 onClick={getRandomAyat}
-                className="btn btn-lg px-4 py-2 fw-bold shadow-sm w-100 mb-2"
+                className="btn btn-lg px-4 py-2 fw-bold shadow-sm w-100 mb-2 text-white"
                 style={{
                   background: "linear-gradient(to right, #4b0082, #9370db)",
                   border: "none",
                   borderRadius: "10px",
                 }}
               >
-                New Ayah
+                New Ayah 
               </button>
             </div>
           

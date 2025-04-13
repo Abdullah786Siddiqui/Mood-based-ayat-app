@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Navbar from "./Components/Navbar";
+import Header from "./Components/Header";
 import { Outlet, useLocation } from "react-router-dom";
 function App() {
   const { pathname } = useLocation(); 
@@ -9,7 +9,7 @@ function App() {
   }, [pathname]);
   return (
     <>
-      <Navbar />
+      <Header />
       <Outlet />
     </>
   );
