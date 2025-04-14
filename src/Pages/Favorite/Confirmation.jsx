@@ -2,7 +2,6 @@ import { Modal, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { AyatAction } from "../../Store/store";
 
-
 let Confirmation = ({ showConfirm, setshowConfirm, deleteAyat }) => {
   console.log(deleteAyat);
 
@@ -32,10 +31,18 @@ let Confirmation = ({ showConfirm, setshowConfirm, deleteAyat }) => {
         <p className=" fw-bold fs-5">Are you Sure to delete Ayat ?</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" className=" bg-success text-white border-success" onClick={handleClose}>
+        <Button
+          variant="secondary"
+          className=" bg-success text-white border-success"
+          onClick={handleClose}
+        >
           Close
         </Button>
-        <Button variant="primary"  className=" bg-danger text-white border-danger" onClick={() => handledelete()}>
+        <Button
+          variant="primary"
+          className=" bg-danger text-white border-danger"
+          onClick={() => handledelete()}
+        >
           Delete
         </Button>
       </Modal.Footer>

@@ -1,7 +1,8 @@
-import {  useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import FavAyatDisplay from "../Favorite/FavAyatDisplay";
 import Confirmation from "../Favorite/Confirmation";
+import ModalOption from "../Home/ModalOption";
 
 const Favorite = () => {
   let getFavAyat = useSelector((store) => store.Ayats.FavAyat);
@@ -9,6 +10,7 @@ const Favorite = () => {
   let [selectedmood, setSelectedmood] = useState(null);
   let [favAyat, setFavAyat] = useState([]);
   let [showConfirm, setshowConfirm] = useState(false);
+  let [deleteAyat, setDeleteAyat] = useState(null);
 
   let passIdFun = (Category) => {
     let FavAyat = getFavAyat.filter((ayat) => ayat.category === Category);
@@ -19,11 +21,19 @@ const Favorite = () => {
   // let handleModal = ()=>{
   //   modalshow(true)
   // }
-  let [deleteAyat, setDeleteAyat] = useState(null);
+  let [AyatModal, setAyatModal] = useState(null);
+  let[showmodal,setshowModal] = useState(false)
   const handleShow = (favAyat) => {
     setDeleteAyat(favAyat);
     setshowConfirm(true);
   };
+
+  let handleModal = (favAyat) => {
+    setshowModal(true)
+    setAyatModal(favAyat);
+    
+  };
+
   const getStartedBtn1 = useRef(null);
 
   const scrollToTarget = () => {
@@ -34,6 +44,7 @@ const Favorite = () => {
       });
     }
   };
+
 
   return (
     <main>
@@ -48,6 +59,7 @@ const Favorite = () => {
           deleteAyat={deleteAyat}
         />
       ) : null}
+      {showmodal ? <ModalOption AyatModal={AyatModal} setshowModal={setshowModal} showmodal={showmodal} />  :null }
 
       <div
         className="accordion accordion-flush border border-3 contify"
@@ -128,6 +140,7 @@ const Favorite = () => {
                         key={ayat.id}
                         favAyat={ayat}
                         handleShow={handleShow}
+                        handleModal={handleModal}
                       />
                     ))
                   ) : favAyat.length === 0 && selectedmood === mood ? (

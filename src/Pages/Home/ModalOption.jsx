@@ -3,9 +3,19 @@ import { LuShare2 } from "react-icons/lu";
 import { FaPlay } from "react-icons/fa";
 import { Modal } from "react-bootstrap";
 import { useEffect, useRef, useState } from "react";
+import { IoClose } from "react-icons/io5";
+const ModalOption = ({
+  show,
+  setShow,
+  Ayat,
+  AyatModal,
+  setshowModal,
+  showmodal,
+}) => {
+  const handleEnd = () => {
+    setShow(false);
+  };
 
-const ModalOption = ({ show, setShow, Ayat }) => {
-  const handleClose = () => setShow(false);
   let [AudioSrc, setAudioSrc] = useState("");
   let [loadings, setLoadings] = useState(false);
   let [playing, setIsPlaying] = useState(false);
@@ -67,41 +77,56 @@ const ModalOption = ({ show, setShow, Ayat }) => {
       alert("Sharing not supported in this browser.");
     }
   };
+  let handlclose = () => setshowModal(false);
 
   return (
     <Modal
-      show={show}
-      onHide={handleClose}
+      show={show || showmodal}
+      onHide={handleEnd}
       centered
       aria-labelledby="contained-modal-title-vcenter"
       // style={{ marginTop: "230px" }}
-
     >
-      <Modal.Header closeButton>
-        <Modal.Title className="text-center w-100">Options</Modal.Title>
+      <Modal.Header closeButton={show}>
+        <Modal.Title className="text-center w-100">Options</Modal.Title>{" "}
+        {showmodal ? (
+          <IoClose size={36} className="cursor fw-lighter " style={{color:"gray"}} onClick={() => handlclose()} />
+        ) : null}
       </Modal.Header>
       <Modal.Body className="fs-1 text-center d-flex justify-content-center gap-5 ">
         {AudioSrc && (
-          <audio ref={audioRef} src={AudioSrc} preload="auto"></audio>
+          <audio
+            ref={audioRef}
+            src={AudioSrc || AyatModal}
+            preload="auto"
+          ></audio>
         )}
         <span
           className="play-div"
-          onClick={() => playAyat(Ayat.Surahno, Ayat.Ayatno)}
+          onClick={() =>
+            playAyat(
+              Ayat?.Surahno || AyatModal?.Surahno,
+              Ayat?.Ayatno || AyatModal?.Ayatno
+            )
+          }
         >
           {playing ? (
             <FaPause className="fs-1 cursor pause" />
           ) : !loadings ? (
-            <FaPlay className="fs-1 cursor play"  />
+            <FaPlay className="fs-1 cursor play" />
           ) : (
-            <div className="spinner-border "style={{ borderWidth: '4px' }} role="status">
-            </div>
+            <div
+              className="spinner-border "
+              style={{ borderWidth: "4px" }}
+              role="status"
+            ></div>
           )}
         </span>
         <span>
           <FaRegBookmark className="cursor" />
         </span>
         <span>
-          <LuShare2 className="cursor"  onClick={handleShare} />
+          <LuShare2 className="cursor" onClick={handleShare} />
         </span>
       </Modal.Body>
     </Modal>

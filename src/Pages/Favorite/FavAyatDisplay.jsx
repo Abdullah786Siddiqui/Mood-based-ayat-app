@@ -2,7 +2,7 @@
 import {  useEffect, useState } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import { MdDelete } from "react-icons/md";
-const FavAyatDisplay = ({ favAyat, handleShow }) => {
+const FavAyatDisplay = ({ favAyat, handleShow , handleModal }) => {
   let [translation, setTranslation] = useState(true);
 
   useEffect(() => {
@@ -17,11 +17,11 @@ const FavAyatDisplay = ({ favAyat, handleShow }) => {
 
       <div className="d-flex justify-content-start align-items-center gap-1  ">
         <HiDotsVertical
-          className="fs-1 cursor  "
-          onClick={() => handleModal()}
+          className="fs-1 cursor   "
+          onClick={() => handleModal(favAyat)}
         />
 
-        <MdDelete className="fs-1 cursor" onClick={() => handleShow(favAyat)} />
+        <MdDelete className="fs-1 cursor text-startgit " onClick={() => handleShow(favAyat)} />
       </div>
 
       <p className="fs-4 fw-bold text-success mb-0">{favAyat.para}</p>

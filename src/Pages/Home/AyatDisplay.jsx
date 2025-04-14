@@ -1,5 +1,5 @@
-import "@fontsource/eb-garamond"; // Quranic Look
-import "@fontsource/merriweather"; // English Translation
+// import "@fontsource/eb-garamond"; // Quranic Look
+// import "@fontsource/merriweather"; // English Translation
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { HiDotsVertical } from "react-icons/hi";
