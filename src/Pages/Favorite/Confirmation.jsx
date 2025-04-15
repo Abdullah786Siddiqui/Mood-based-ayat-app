@@ -1,12 +1,15 @@
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { AyatAction } from "../../Store/store";
+import { useEffect } from "react";
 
 let Confirmation = ({ showConfirm, setshowConfirm, deleteAyat }) => {
   console.log(deleteAyat);
 
   const handleClose = () => setshowConfirm(false);
   let getFavAyat = useSelector((store) => store.Ayats.FavAyat);
+    let ToggleMode = useSelector((store) => store.ToggleMode.darkMode);
+  
   let dispatch = useDispatch();
 
   let delFAvAyat = (ayat) => {

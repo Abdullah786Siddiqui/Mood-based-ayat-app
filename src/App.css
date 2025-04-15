@@ -518,7 +518,7 @@ body,
   margin-top: 8px;
   font-weight: bold;
   font-size: 1rem;
-  color: #333;
+  color: #444;
 }
 
 .contact-header {
@@ -832,3 +832,4 @@ color: #6f2dbd;
 .btn:hover::before {
   width: 160%;
 }
+

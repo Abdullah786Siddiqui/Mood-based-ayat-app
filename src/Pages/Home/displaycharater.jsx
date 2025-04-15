@@ -1,5 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
 const Displaycharater = ({ scrollToTarget }) => {
+  let ToggleMode = useSelector((store) => store.ToggleMode.darkMode);
   return (
     <>
       <div className="container d-flex flex-column flex-md-row align-items-start justify-content-between text-center text-md-start">
@@ -12,7 +14,7 @@ const Displaycharater = ({ scrollToTarget }) => {
             you. Just choose your mood, and let the divine words bring clarity,
             comfort, and inspiration.
           </p>
-          <div class="card border-0  ">
+          <div class={`card border-0 ${!ToggleMode ? "bg-black" : "bg-white"} `}>
             <div class="loader ">
               <p >What your Mood Today!</p>
               <div class="words" >
@@ -42,7 +44,7 @@ const Displaycharater = ({ scrollToTarget }) => {
         {/* Main Right Side Div */}
 
         <div className="img-cont ">
-          `
+          
           <img
             src="/public/Images/MainCharacter.png"
             className="img-fluid men-img person"

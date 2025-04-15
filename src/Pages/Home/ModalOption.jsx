@@ -4,6 +4,7 @@ import { FaPlay } from "react-icons/fa";
 import { Modal } from "react-bootstrap";
 import { useEffect, useRef, useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { useSelector } from "react-redux";
 const ModalOption = ({
   show,
   setShow,
@@ -12,6 +13,8 @@ const ModalOption = ({
   setshowModal,
   showmodal,
 }) => {
+      let ToggleMode = useSelector((store) => store.ToggleMode.darkMode);
+  
   const handleEnd = () => {
     setShow(false);
   };
@@ -87,13 +90,13 @@ const ModalOption = ({
       aria-labelledby="contained-modal-title-vcenter"
       // style={{ marginTop: "230px" }}
     >
-      <Modal.Header closeButton={show}>
-        <Modal.Title className="text-center w-100">Options</Modal.Title>{" "}
+      <Modal.Header closeButton={show} className={` ${!ToggleMode ? "bg-secondary ": "bg-white text-black"} `}>
+        <Modal.Title className="text-center  w-100">Options</Modal.Title>{" "}
         {showmodal ? (
           <IoClose size={36} className="cursor fw-lighter " style={{color:"gray"}} onClick={() => handlclose()} />
         ) : null}
       </Modal.Header>
-      <Modal.Body className="fs-1 text-center d-flex justify-content-center gap-5 ">
+      <Modal.Body className={`fs-1 text-center  ${!ToggleMode ? "bg-secondary ": "bg-white text-black"}  d-flex justify-content-center gap-5 `}>
         {AudioSrc && (
           <audio
             ref={audioRef}

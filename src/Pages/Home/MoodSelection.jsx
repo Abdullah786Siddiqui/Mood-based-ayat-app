@@ -1,10 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AyatAction } from "../../Store/store";
 
 
 const MoodSelection = ({ref , scrollToTarget2}) => {
   const dispatch = useDispatch();
+  let ToggleMode = useSelector((store) => store.ToggleMode.darkMode);
   // jis bhi mood pr click hota hey os ka attribute={mood} store ko bhejta hey 
   const handleMood = (event) => {
     const btnMood = event.target.closest("img");
@@ -35,53 +36,53 @@ const MoodSelection = ({ref , scrollToTarget2}) => {
                 src="/public/Images/Happiness.jpg"
                 data-mood="Happiness"
                 onClick={scrollToTarget2} 
-                className="img-fluid gallery-img mood-btn shadow-lg"
+                className="img-fluid gallery-img mood-btn shadow-lg mb-1"
                 alt="Happiness"
         
               />
-            <div className="mood-text">Happiness</div>
+            <div className={`${ToggleMode ? "text-black":"text-white"}`}>Happiness</div>
           </div>
           <div className="col-6 col-lg-2 gallery-item cursor">
             <img
               src="/public/Images/Thankful.jpg"
               data-mood="Thankful"
               onClick={scrollToTarget2} 
-              className="img-fluid gallery-img mood-btn shadow-lg"
+              className="img-fluid gallery-img mood-btn shadow-lg mb-1"
               alt="Thankful"
             />
-            <div className="mood-text">Thankful</div>
+            <div className={`${ToggleMode ? "text-black":"text-white"}`}>Thankful</div>
           </div>
           <div className="col-6 col-lg-2 gallery-item cursor">
             <img
               src="/public/Images/Angry.jpg"
               data-mood="Angry"
               onClick={scrollToTarget2} 
-              className="img-fluid gallery-img mood-btn shadow-lg"
+              className="img-fluid gallery-img mood-btn shadow-lg mb-1"
               alt="Angry"
             />
-            <div className="mood-text">Angry</div>
+            <div className={`${ToggleMode ? "text-black":"text-white"}`}>Angry</div>
           </div>
           <div className="col-6 col-lg-2 gallery-item cursor">
             <img
               src="/public/Images/Anxious.jpg"
               data-mood="Anxious"
               onClick={scrollToTarget2} 
-              className="img-fluid gallery-img mood-btn shadow-lg"
+              className="img-fluid gallery-img mood-btn shadow-lg mb-1"
               alt="Anxious"
             />
-            <div className="mood-text">Anxious</div>
+            <div className={`${ToggleMode ? "text-black":"text-white"}`}>Anxious</div>
           </div>
           <div className="col-6 col-lg-2 gallery-item cursor">
             <img
               src="/public/Images/Sad.jpg"
               data-mood="Sad"
               onClick={scrollToTarget2} 
-              className="img-fluid  gallery-img mood-btn shadow-lg"
+              className="img-fluid  gallery-img mood-btn shadow-lg mb-1"
               alt="Sad"
             />
             <div id="targetSection"></div>
 
-            <div id="AnxiousSection" className="mood-text" >
+            <div id="AnxiousSection" className={` ${ToggleMode ? "text-black":"text-white"}`} >
               Sad
             </div>
           </div>

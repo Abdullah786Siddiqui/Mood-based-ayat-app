@@ -1,4 +1,4 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import Ayatdata from "../data/ayat";
@@ -7,7 +7,7 @@ const AyatSlice = createSlice({
   initialState: {
     Mood: [],
     FavAyat: [],
-    audioUrl :[]
+    audioUrl: [],
   },
   reducers: {
     filterAyat: (state, action) => {
@@ -22,27 +22,43 @@ const AyatSlice = createSlice({
       state.FavAyat = [...state.FavAyat, action.payload];
     },
     removeFavAyat: (state, action) => {
-     
-      state.FavAyat = state.FavAyat.filter((ayat) => ayat.id !== action.payload);
-    }
-  
+      state.FavAyat = state.FavAyat.filter(
+        (ayat) => ayat.id !== action.payload
+      );
+    },
   },
+});
+
+const ModeSlice = createSlice({
+  name: "ToggleMode",
+  initialState: {
+    darkMode: false,
+  },
+  reducers: {
+    Toggle: (state, action) => {
+      state.darkMode = !state.darkMode;
+    },
+  },
+});
+
+const rootReducer = combineReducers({
+  Ayats: AyatSlice.reducer,
+  ToggleMode: ModeSlice.reducer,
 });
 const persistConfig = {
   key: "root",
   storage,
   blacklist: ["Mood"],
 };
-const persistedReducer = persistReducer(persistConfig, AyatSlice.reducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 const MoodBaseAyatStore = configureStore({
-  reducer: {
-    Ayats: persistedReducer,
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),
 });
 export const AyatAction = AyatSlice.actions;
+export let ToggleAction = ModeSlice.actions;
 export const persistor = persistStore(MoodBaseAyatStore);
 export default MoodBaseAyatStore;
