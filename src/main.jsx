@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Contact from "./Pages/Contact/Contact.jsx";
 // import Favorite from "./Pages/Favorite.jsx";
 import Home from "./Pages/Home/Home.jsx";
+import VoiceAyat from "./Pages/VoiceFeactue/VoiceAyat.jsx"
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import MoodBaseAyatStore, { persistor } from "./Store/store.js";
@@ -20,6 +21,8 @@ let router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "contact", element: <Contact /> },
       { path: "favorite", element: <Favorite /> },
+      { path: "VoiceAyat", element: <VoiceAyat /> },
+
     ],
   },
 ]);

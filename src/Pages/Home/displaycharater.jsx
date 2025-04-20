@@ -14,15 +14,15 @@ const Displaycharater = ({ scrollToTarget }) => {
             you. Just choose your mood, and let the divine words bring clarity,
             comfort, and inspiration.
           </p>
-          <div class={`card border-0 ${!ToggleMode ? "bg-black" : "bg-white"} `}>
-            <div class="loader ">
+          <div className={`card border-0 ${!ToggleMode ? "bg-black" : "bg-white"} `}>
+            <div className="loader ">
               <p >What your Mood Today!</p>
-              <div class="words" >
-                <span class="word">Happy</span>
-                <span class="word">Sad</span>
-                <span class="word">Anxious</span>
-                <span class="word">Thankfull</span>
-                <span class="word">Angry</span>
+              <div className="words" >
+                <span className="word">Happy</span>
+                <span className="word">Sad</span>
+                <span className="word">Anxious</span>
+                <span className="word">Thankfull</span>
+                <span className="word">Angry</span>
               </div>
             </div>
           </div>
@@ -35,7 +35,7 @@ const Displaycharater = ({ scrollToTarget }) => {
           >
           
           </button> */}
-          <button class="btn p-sm-1 p-md-1 p-lg-1 mt-1" id="started" onClick={scrollToTarget}>
+          <button className="btn p-sm-1 p-md-1 p-lg-1 mt-1" id="started" onClick={scrollToTarget}>
             {" "}
             Get started
           </button>

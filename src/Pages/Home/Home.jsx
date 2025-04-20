@@ -8,6 +8,7 @@ import ModalOption from "../Home/ModalOption";
 const Home = () => {
   // store se mood ke array ko acces kia
   const filteredAyat = useSelector((store) => store.Ayats.Mood);
+
   const [randomAyat, setRandomAyat] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -24,15 +25,39 @@ const Home = () => {
   }, [filteredAyat, randomAyat]);
   useEffect(() => {
     const savedAyat = JSON.parse(localStorage.getItem("previousAyat"));
+
     if (savedAyat && filteredAyat.find((ayat) => ayat.id === savedAyat.id)) {
       setRandomAyat(savedAyat);
     } else if (filteredAyat.length > 0) {
       getRandomAyat();
     }
   }, [filteredAyat]);
+  // const storedAyats = localStorage.getItem("Ayats");
+  // if (storedAyats) {
+  //   const parsed = JSON.parse(storedAyats);
+  //   console.log(parsed);
+    
+  // }
+  // useEffect(() => {
+  //   const navType = performance.getEntriesByType("navigation")[0]?.type;
+  //  console.log(navType);
+   
+  //  if (navType === "reload") {
+  //   const storedAyats = localStorage.getItem("Ayats");
+  //   if (storedAyats) {
+  //     const parsed = JSON.parse(storedAyats);
+      
+  //     // Mood ko delete karo
+  //     delete parsed.Mood;
+      
+  //     // Dobara update karo localStorage mein bina Mood ke
+  //     localStorage.setItem("Ayats", JSON.stringify(parsed));
+  //   }
+  // }
+  
+  // }, []);
 
   const getStartedBtn = useRef(null);
-  const allMoodBtn = useRef(null);
 
   const scrollToTarget = () => {
     if (getStartedBtn.current) {
@@ -42,10 +67,14 @@ const Home = () => {
       });
     }
   };
+  const MoodSelect = useRef(null);
+
   const scrollToTarget2 = () => {
-    const targetElement = document.getElementById("aytsmooth"); // ID ko match karein
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
+    if (MoodSelect.current) {
+      MoodSelect.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }
   };
   const handleShow = () => setShow(true);
@@ -54,13 +83,15 @@ const Home = () => {
     <>
       <Displaycharater scrollToTarget={scrollToTarget} />
       <MoodSelection ref={getStartedBtn} scrollToTarget2={scrollToTarget2} />
+      <div ref={MoodSelect} className="pb-5"></div>
+
       {show ? (
         <ModalOption show={show} setShow={setShow} Ayat={randomAyat} />
       ) : null}
-      <div id="aytsmooth" style={{ marginBottom: "65px" }}></div>
 
       {randomAyat && (
         <AyatDisplay
+          ref={MoodSelect}
           Ayat={randomAyat}
           getRandomAyat={getRandomAyat}
           handleShow={handleShow}

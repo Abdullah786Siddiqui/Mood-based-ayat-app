@@ -13,7 +13,6 @@ const Header = () => {
 
   const dispatch = useDispatch();
   let ToggleMode = useSelector((store) => store.ToggleMode.darkMode);
-  console.log(ToggleMode);
 
   useEffect(() => {
     if (ToggleMode) {
@@ -32,7 +31,7 @@ const Header = () => {
         aria-label="Fourth navbar example"
       >
         <div className="container-fluid p-0  ">
-          <Link to={"/"} className="navbar-brand mt-2 mt-sm-1 ">
+          <Link to={"/"} className="navbar-brand mt-2 mt-sm-1 z">
             {/*  Navbar Image  */}
 
             <img
@@ -73,10 +72,10 @@ const Header = () => {
               <li className="nav-item">
                 <Link
                   className="nav-link cta text-black fw-bold cursor colour"
-                  to={"about"}
+                  to={"VoiceAyat"}
                   onClick={() => setOpen(false)}
                 >
-                  About
+                  Voice Ayat
                 </Link>
               </li>
               <li className="nav-item">

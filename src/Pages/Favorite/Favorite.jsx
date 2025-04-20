@@ -22,16 +22,15 @@ const Favorite = () => {
   //   modalshow(true)
   // }
   let [AyatModal, setAyatModal] = useState(null);
-  let[showmodal,setshowModal] = useState(false)
+  let [showmodal, setshowModal] = useState(false);
   const handleShow = (favAyat) => {
     setDeleteAyat(favAyat);
     setshowConfirm(true);
   };
 
   let handleModal = (favAyat) => {
-    setshowModal(true)
+    setshowModal(true);
     setAyatModal(favAyat);
-    
   };
 
   const getStartedBtn1 = useRef(null);
@@ -44,7 +43,14 @@ const Favorite = () => {
       });
     }
   };
-
+  const moodColors = {
+    Angry: "#DCDFD8",
+    Happiness: "#d0e9e3",
+    Sad: "#d8cdc9",
+    Anxious: "#d3c4a7",
+    Thankful: "#B0F8E7",
+    // etc.
+  };
 
   return (
     <main>
@@ -59,7 +65,13 @@ const Favorite = () => {
           deleteAyat={deleteAyat}
         />
       ) : null}
-      {showmodal ? <ModalOption AyatModal={AyatModal} setshowModal={setshowModal} showmodal={showmodal} />  :null }
+      {showmodal ? (
+        <ModalOption
+          AyatModal={AyatModal}
+          setshowModal={setshowModal}
+          showmodal={showmodal}
+        />
+      ) : null}
 
       <div
         className="accordion accordion-flush border border-3 contify"
@@ -76,7 +88,7 @@ const Favorite = () => {
             >
               <h2 className="accordion-header">
                 <button
-                  style={{ backgroundColor: "#d0e9e3" }}
+                  style={{ backgroundColor: moodColors[mood] }}
                   className="accordion-button collapsed fs-5 favbtn d-flex align-items-center text-start"
                   type="button"
                   data-mood="Happiness"

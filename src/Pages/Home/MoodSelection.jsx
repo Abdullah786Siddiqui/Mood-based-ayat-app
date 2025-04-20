@@ -28,7 +28,7 @@ const MoodSelection = ({ref , scrollToTarget2}) => {
       <div className="container py-4   ">
         <div
           className="row g-3 d-flex justify-content-center"
-          onClick={handleMood}
+          onClick={(e)=>handleMood(e)}
         >
           <div className="col-6 col-lg-2 gallery-item cursor">
        

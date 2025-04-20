@@ -21,18 +21,14 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat,handleShow }
   let dispatch = useDispatch();
 
   useEffect(() => {
-    // if (FavoriteAyat) {
-    //   setDisplayedAyat(FavoriteAyat);
-    //   setloading(false);
-    //   return;
-    // }
+    
     if (!Ayat) return;
     setloading(true);
     setDisplayedAyat(Ayat);
 
     let Timer = setTimeout(() => {
       setloading(false);
-    }, 500);
+    }, 1000);
     return () => clearTimeout(Timer);
   }, [Ayat, FavoriteAyat]);
 
@@ -78,7 +74,7 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat,handleShow }
         <Skeleton />
       ) : (
         <>
-          <div className={`Ayat-div  fade-zoom-up-animation ${!ToggleMode ? "bg-black  ": "bg-white "} shadow-lg rounded-3 p-4 px-3 text-center w-100 mt-3 `}>
+          <div className={`Ayat-div ${!ToggleMode ? "bg-black  ": "bg-white "} shadow-lg rounded-3 p-4 px-3 text-center w-100 mt-3 `}>
             <div className="d-flex justify-content-between align-items-center mb-3 ">
               <div className="d-flex align-items-center gap-1  ">
                 <div
@@ -112,7 +108,7 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat,handleShow }
 
               <select
                 id="translate-option"
-                className={`form-select w-auto cursor fw-bold ${!ToggleMode ? "bg-black text-success ": "bg-white text-success"} border-2 shadow-sm`}
+                className={`form-select w-auto cursor fw-bold ${!ToggleMode ? "bg-black text-success ": "bg-white text-success"} border-2 shadow-sm `}
                 onChange={handleTranslate}
                 defaultValue=""
               >
