@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FaPlay } from "react-icons/fa";
+import { FaPause, FaPlay } from "react-icons/fa";
 import { MdOutlineKeyboardVoice } from "react-icons/md";
 const VoiceAyat = () => {
   const [text, setText] = useState("");
   let [matchedAyats, setMatchedAyats] = useState([]);
-
+  let [playing, setplaying] = useState(false);
   const [listening, setListening] = useState(false);
+  
   const startListening = () => {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -75,13 +76,32 @@ const VoiceAyat = () => {
   };
   function addDiacriticsToArabicText(text) {
     const diacriticMap = {
-      ب: "بَ",
-      ت: "تَ",
-      ج: "جَ",
-      ح: "حَ",
-      ك: "كُ",
-      م: "مِ",
+      ب: "بَ",  // Ba with Fatha
+      ت: "تَ",  // Ta with Fatha
+      ج: "جَ",  // Jeem with Fatha
+      ح: "حَ",  // Haa with Fatha
+      ك: "كُ",  // Kaaf with Dammah
+      م: "مِ",  // Meem with Kasrah
+      س: "سِ",  // Seen with Kasrah
+      ص: "صَ",  // Saad with Fatha
+      ض: "ضَ",  // Daad with Fatha
+      ط: "طُ",  // Taa with Dammah
+      ع: "عَ",  // Ain with Fatha
+      غ: "غُ",  // Ghayn with Dammah
+      ف: "فَ",  // Fa with Fatha
+      ق: "قُ",  // Qaaf with Dammah
+      ن: "نِ",  // Noon with Kasrah
+      ر: "رَ",  // Raa with Fatha
+      ل: "لَ",  // Laam with Fatha
+      ه: "هَ",  // Ha with Fatha
+      و: "وُ",  // Waw with Dammah
+      ي: "يِ",  // Yaa with Kasrah
+      د: "دَ",  // Dal with Fatha
+      ذ: "ذَ",  // Dhal with Fatha
+      ز: "زَ",  // Zay with Fatha
+      ش: "شَ"   // Sheen with Fatha
     };
+    
 
     return text
       .split("")
@@ -92,19 +112,39 @@ const VoiceAyat = () => {
     return addDiacriticsToArabicText(text);
   };
   let Audioref = useRef(null);
-
-  const PlayAyat = (audioUrl) => {
+  const [activeIndex, setActiveIndex] = useState(null);
+  const PlayAyat = (audioUrl, index) => {
     if (audioUrl && Audioref.current) {
-      Audioref.current.src = audioUrl;
-      Audioref.current.play();
-    } else {
-      console.log("🎧 Audio source nahi mila!");
+      if (activeIndex !== index) {
+        Audioref.current.src = audioUrl;
+        Audioref.current.play();
+        setplaying(true);
+        setActiveIndex(index);
+      } else {
+        setplaying(false);
+        Audioref.current.pause();
+        setActiveIndex(null);
+      }
     }
   };
+  useEffect(() => {
+    const audio = Audioref.current;
+    if (!audio) return;
+
+    const handleEnded = () => {
+      setActiveIndex(null);
+    };
+
+    audio.addEventListener("ended", handleEnded);
+
+    return () => {
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, [PlayAyat]);
 
   return (
-    <div className="p-5 text-center">
-      <h1 className="text-2xl font-bold ">🎙️ Arabic Voice to Text</h1>
+    <div className="p-5 text-center ">
+      <h1 className="text-2xl font-bold ">🎙️Voice-Ayat Recognition</h1>
 
       <MdOutlineKeyboardVoice
         style={{ color: listening && "green", fontSize: "50px" }}
@@ -112,6 +152,8 @@ const VoiceAyat = () => {
         className="cursor"
         disabled={listening}
       />
+
+      <p> {text}</p>
       <audio ref={Audioref} preload="auto"></audio>
 
       <div className="mt-1 text-xl">
@@ -120,11 +162,16 @@ const VoiceAyat = () => {
         <h3>
           {matchedAyats.map((ayat, index) => (
             <span
-              className="border border-black d-flex justify-content-center mb-3 p-5 "
+              className="border border-black d-flex justify-content-center mb-3 p-5 gap-2 "
               key={index}
+              onClick={() => PlayAyat(ayat.audio, index)}
             >
               {processText(ayat.text)}
-              {ayat.audio && <FaPlay onClick={() => PlayAyat(ayat.audio)} />}
+              {activeIndex === index ? (
+                <FaPause className="fs-2 cursor " />
+              ) : (
+                <FaPlay className="cursor fs-2" />
+              )}
               <br />
             </span>
           ))}
