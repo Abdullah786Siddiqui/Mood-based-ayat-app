@@ -93,7 +93,7 @@ const ModalOption = ({
       <Modal.Header closeButton={show} className={` ${!ToggleMode ? "bg-secondary ": "bg-white text-black"} `}>
         <Modal.Title className="text-center  w-100">Options</Modal.Title>{" "}
         {showmodal ? (
-          <IoClose size={36} className="cursor fw-lighter " style={{color:"gray"}} onClick={() => handlclose()} />
+          <IoClose size={36} className="cursor fw-lighter "  onClick={() => handlclose()} />
         ) : null}
       </Modal.Header>
       <Modal.Body className={`fs-1 text-center  ${!ToggleMode ? "bg-secondary ": "bg-white text-black"}  d-flex justify-content-center gap-5 `}>

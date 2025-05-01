@@ -143,8 +143,17 @@ const VoiceAyat = () => {
   }, [PlayAyat]);
 
   return (
-    <div className="p-5 text-center ">
-      <h1 className="text-2xl font-bold ">🎙️Voice-Ayat Recognition</h1>
+    <>
+   <div class="container-fluid bg-light py-2">
+  <div class="marquee-container">
+    <p class="marquee-text text-center fw-bold text-success fs-2">
+      🚧 Working on this Feature... Stay tuned! 🔧
+    </p>
+  </div>
+</div>
+
+    <div className="p-5 text-center mt-0">
+      <h1 className="text-2xl  font-bold ">🎙️Voice-Ayat Recognition</h1>
 
       <MdOutlineKeyboardVoice
         style={{ color: listening && "green", fontSize: "50px" }}
@@ -178,6 +187,7 @@ const VoiceAyat = () => {
         </h3>
       </div>
     </div>
+    </>
   );
 };
 

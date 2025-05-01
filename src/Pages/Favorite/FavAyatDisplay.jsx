@@ -2,32 +2,34 @@
 import {  useEffect, useState } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import { MdDelete } from "react-icons/md";
+import { useSelector } from "react-redux";
 const FavAyatDisplay = ({ favAyat, handleShow , handleModal }) => {
   let [translation, setTranslation] = useState(true);
+  let ToggleMode = useSelector((store) => store.ToggleMode.darkMode);
 
   useEffect(() => {
-    if (/[\u0600-\u06FF]/.test(favAyat.translation)) {
+    if (favAyat && /[\u0600-\u06FF]/.test(favAyat.translation)) {
       setTranslation(false);
     }
-  }, [setTranslation]);
+  }, [favAyat]);
 
   return (
-    <div className="Ayat-div fade-zoom-up-animation bg-white shadow-lg rounded-3 p-4 text-center w-100 mt-3">
+    <div className={`Ayat-div fade-zoom-up-animation ${ToggleMode ? " bg-white" :"bg-black"}  shadow-lg rounded-3 p-4 text-center w-100 mt-3 border border-white`}>
       <div className="d-flex justify-content-between align-items-center mb-3"></div>
 
       <div className="d-flex justify-content-start align-items-center gap-1  ">
         <HiDotsVertical
-          className="fs-1 cursor   "
+          className={`fs-1 cursor ${ToggleMode ? " text-black" :"text-white"}  `} 
           onClick={() => handleModal(favAyat)}
         />
 
-        <MdDelete className="fs-1 cursor text-startgit " onClick={() => handleShow(favAyat)} />
+        <MdDelete className={`fs-1 cursor ${ToggleMode ? " text-black" :"text-white"} text-startgit `} onClick={() => handleShow(favAyat)} />
       </div>
 
       <p className="fs-4 fw-bold text-success mb-0">{favAyat.para}</p>
       <p className="fs-5 fw-semibold text-success mb-0">{favAyat.surah}</p>
 
-      <p className="ayat-show fs-2 fw-bold text-dark text-center mt-3 quran-text">
+      <p className={`ayat-show fs-2 fw-bold ${ToggleMode ? " text-black" :"text-white"} text-center mt-3 quran-text`}>
         {favAyat.ayat}
       </p>
 

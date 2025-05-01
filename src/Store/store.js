@@ -19,11 +19,13 @@ const AyatSlice = createSlice({
     },
     addFavAyat: (state, action) => {
       let LatestAyat = action.payload;
-      state.FavAyat = [...state.FavAyat, action.payload];
+
+      state.FavAyat = [...state.FavAyat, LatestAyat];
     },
     removeFavAyat: (state, action) => {
+      
       state.FavAyat = state.FavAyat.filter(
-        (ayat) => ayat.id !== action.payload
+        (ayat) => ayat.id !== action.payload.id
       );
     },
   },
@@ -32,7 +34,7 @@ const AyatSlice = createSlice({
 const ModeSlice = createSlice({
   name: "ToggleMode",
   initialState: {
-    darkMode: false,
+    darkMode: true,
   },
   reducers: {
     Toggle: (state, action) => {

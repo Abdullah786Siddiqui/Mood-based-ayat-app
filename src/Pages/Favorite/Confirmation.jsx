@@ -1,39 +1,56 @@
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { AyatAction } from "../../Store/store";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-let Confirmation = ({ showConfirm, setshowConfirm, deleteAyat }) => {
-  console.log(deleteAyat);
-
+let Confirmation = React.memo(({ showConfirm, setshowConfirm, deleteAyat }) => {
   const handleClose = () => setshowConfirm(false);
   let getFavAyat = useSelector((store) => store.Ayats.FavAyat);
-    let ToggleMode = useSelector((store) => store.ToggleMode.darkMode);
-  
+  let ToggleMode = useSelector((store) => store.ToggleMode.darkMode);
+
   let dispatch = useDispatch();
 
-  let delFAvAyat = (ayat) => {
-    dispatch(AyatAction.removeFavAyat(ayat.id));
-  };
-  let handledelete = () => {
-    delFAvAyat(deleteAyat);
+  let handledelete = (deleteAyat) => {
+    dispatch(AyatAction.removeFavAyat(deleteAyat));
     handleClose();
+
   };
+
   return (
     <Modal
       show={showConfirm}
       onHide={handleClose}
       centered
+      backdrop="static"
       aria-labelledby="contained-modal-title-vcenter"
       // style={{ marginTop: "230px" }}
     >
-      <Modal.Header closeButton>
-        <Modal.Title className="text-center w-100">Options</Modal.Title>
+      <Modal.Header
+        closeButton
+        className={`${ToggleMode ? "bg-white" : "bg-secondary"}   border-0`}
+      >
+        <Modal.Title
+          className={`text-center ${
+            !ToggleMode ? "text-black" : "text-black bg-white"
+          } w-100`}
+        >
+          Options
+        </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <p className=" fw-bold fs-5">Are you Sure to delete Ayat ?</p>
+      <Modal.Body
+        className={`${ToggleMode ? "bg-white" : "bg-secondary"}   border-0`}
+      >
+        <p
+          className={` ${
+            !ToggleMode ? "text-black bg-secondary" : "text-black bg-white"
+          } fw-bold fs-5 `}
+        >
+          Are you Sure to delete Ayat ?
+        </p>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer
+        className={`${ToggleMode ? "bg-white" : "bg-secondary"}   border-0`}
+      >
         <Button
           variant="secondary"
           className=" bg-success text-white border-success"
@@ -44,12 +61,12 @@ let Confirmation = ({ showConfirm, setshowConfirm, deleteAyat }) => {
         <Button
           variant="primary"
           className=" bg-danger text-white border-danger"
-          onClick={() => handledelete()}
+          onClick={() => handledelete(deleteAyat)}
         >
           Delete
         </Button>
       </Modal.Footer>
     </Modal>
   );
-};
+});
 export default Confirmation;

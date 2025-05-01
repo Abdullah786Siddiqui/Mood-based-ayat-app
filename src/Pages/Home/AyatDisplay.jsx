@@ -48,6 +48,7 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat,handleShow }
   );
 
   let getFavAyat = useSelector((store) => store.Ayats.FavAyat) || [];
+  
 
   useEffect(() => {
     if (displayedAyat) {
@@ -61,6 +62,7 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat,handleShow }
       toast.success("Ayat added to Favorites!");
       // FavoriteAyat ? null : toast.success("Ayat added to Favorites!");
     } else {
+      
       dispatch(AyatAction.removeFavAyat(favAyat));
       toast.error("Ayat removed from Favorites!");
       // FavoriteAyat ? null : toast.error("Ayat removed from Favorites!");

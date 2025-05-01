@@ -1,7 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-const Displaycharater = ({ scrollToTarget }) => {
+const Displaycharater = ({ scrollToTarget}) => {
   let ToggleMode = useSelector((store) => store.ToggleMode.darkMode);
+
+  let handleMood = (e)=>{
+    if (e.target.classList.contains('word')) {
+      const mood = e.target.textContent;
+      console.log("Selected Mood:", mood);
+    }
+    
+
+  }
   return (
     <>
       <div className="container d-flex flex-column flex-md-row align-items-start justify-content-between text-center text-md-start">
@@ -17,12 +26,12 @@ const Displaycharater = ({ scrollToTarget }) => {
           <div className={`card border-0 ${!ToggleMode ? "bg-black" : "bg-white"} `}>
             <div className="loader ">
               <p >What your Mood Today!</p>
-              <div className="words" >
-                <span className="word">Happy</span>
-                <span className="word">Sad</span>
-                <span className="word">Anxious</span>
-                <span className="word">Thankfull</span>
-                <span className="word">Angry</span>
+              <div className="words"onClick={(e)=>handleMood(e)} >
+                <span className="word cursor" >Happy</span>
+                <span className="word cursor" >Sad</span>
+                <span className="word cursor" >Anxious</span>
+                <span className="word cursor">Thankfull</span>
+                <span className="word cursor">Angry</span>
               </div>
             </div>
           </div>

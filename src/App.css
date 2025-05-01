@@ -733,6 +733,7 @@ html {
   overflow: hidden;
   position: relative;
 }
+
 .words::after {
   content: "";
   position: absolute;
@@ -751,7 +752,7 @@ html {
   height: 100%;
   padding-left: 6px;
 color: #6f2dbd;
-  animation: spin_4991 4s infinite;
+  animation: spin_4991 6s infinite;
 }
 
 @keyframes spin_4991 {
@@ -832,4 +833,24 @@ color: #6f2dbd;
 .btn:hover::before {
   width: 160%;
 }
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  background-color: #f8f9fa; /* Light background for contrast */
+  padding: 10px 0;
+}
 
+.marquee-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: slide-left 10s linear infinite;
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

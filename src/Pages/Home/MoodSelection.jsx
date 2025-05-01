@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AyatAction } from "../../Store/store";
 
 
-const MoodSelection = ({ref , scrollToTarget2}) => {
+const MoodSelection = ({ref , scrollToTarget2 }) => {
   const dispatch = useDispatch();
   let ToggleMode = useSelector((store) => store.ToggleMode.darkMode);
   // jis bhi mood pr click hota hey os ka attribute={mood} store ko bhejta hey 

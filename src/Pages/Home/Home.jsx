@@ -4,6 +4,7 @@ import MoodSelection from "../Home/MoodSelection";
 import AyatDisplay from "../Home/AyatDisplay";
 import { useSelector } from "react-redux";
 import ModalOption from "../Home/ModalOption";
+import { Container } from "react-bootstrap";
 
 const Home = () => {
   // store se mood ke array ko acces kia
@@ -81,7 +82,7 @@ const Home = () => {
 
   return (
     <>
-      <Displaycharater scrollToTarget={scrollToTarget} />
+      <Displaycharater scrollToTarget={scrollToTarget}  />
       <MoodSelection ref={getStartedBtn} scrollToTarget2={scrollToTarget2} />
       <div ref={MoodSelect} className="pb-5"></div>
 
@@ -99,6 +100,58 @@ const Home = () => {
       )}
 
       <div>
+{/*       
+         <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">📖 Quranic Verses</h5>
+              <p class="card-text">Read powerful ayahs with translation and tafsir.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">🕌 Hadith</h5>
+              <p class="card-text">Explore authentic Hadiths from Sahih Bukhari, Muslim, etc.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">📚 Islamic Articles</h5>
+              <p class="card-text">Articles on Islamic living, worship, and history.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">🕋 Prayer Times</h5>
+              <p class="card-text">Check accurate prayer times based on your location.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">🌙 Islamic Calendar</h5>
+              <p class="card-text">Keep track of important Islamic dates and events.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">💬 Duas & Azkar</h5>
+              <p class="card-text">Daily duas and morning/evening azkar for protection.</p>
+            </div>
+          </div>
+        </div>
+      </div> */}
+    
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
           nesciunt accusantium a, tempora sit veritatis iste vero voluptas

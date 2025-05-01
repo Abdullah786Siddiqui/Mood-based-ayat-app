@@ -97,7 +97,7 @@ const Header = () => {
                 </Link>
               </li>
             </ul>
-            <div className="Main-Component d-flex gap-2 ">
+            <div className="Main-Component d-flex mx-4 mb-2">
               <span onClick={()=>dispatch(ToggleAction.Toggle(true))}>
                 {ToggleMode ? (
                   <MdOutlineDarkMode
@@ -113,11 +113,7 @@ const Header = () => {
                   />
                 )}
               </span>
-              <FaRegUser
-                className={`fs-3 cursor me-2  ${
-                  ToggleMode ? "text-black" : "text-white"
-                }`}
-              />
+             
             </div>
           </div>
         </div>
