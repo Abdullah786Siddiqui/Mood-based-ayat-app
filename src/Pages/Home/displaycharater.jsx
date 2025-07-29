@@ -55,7 +55,7 @@ const Displaycharater = ({ scrollToTarget}) => {
         <div className="img-cont ">
           
           <img
-            src="/public/Images/MainCharacter.png"
+            src="/Images/MainCharacter.png"
             className="img-fluid men-img person"
           />
         </div>

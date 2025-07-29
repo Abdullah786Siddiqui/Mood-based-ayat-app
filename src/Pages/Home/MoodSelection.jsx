@@ -33,7 +33,7 @@ const MoodSelection = ({ref , scrollToTarget2 }) => {
           <div className="col-6 col-lg-2 gallery-item cursor">
        
               <img
-                src="/public/Images/Happiness.jpg"
+                src="/Images/Happiness.jpg"
                 data-mood="Happiness"
                 onClick={scrollToTarget2} 
                 className="img-fluid gallery-img mood-btn shadow-lg mb-1"
@@ -44,7 +44,7 @@ const MoodSelection = ({ref , scrollToTarget2 }) => {
           </div>
           <div className="col-6 col-lg-2 gallery-item cursor">
             <img
-              src="/public/Images/Thankful.jpg"
+              src="/Images/Thankful.jpg"
               data-mood="Thankful"
               onClick={scrollToTarget2} 
               className="img-fluid gallery-img mood-btn shadow-lg mb-1"
@@ -54,7 +54,7 @@ const MoodSelection = ({ref , scrollToTarget2 }) => {
           </div>
           <div className="col-6 col-lg-2 gallery-item cursor">
             <img
-              src="/public/Images/Angry.jpg"
+              src="/Images/Angry.jpg"
               data-mood="Angry"
               onClick={scrollToTarget2} 
               className="img-fluid gallery-img mood-btn shadow-lg mb-1"
@@ -64,7 +64,7 @@ const MoodSelection = ({ref , scrollToTarget2 }) => {
           </div>
           <div className="col-6 col-lg-2 gallery-item cursor">
             <img
-              src="/public/Images/Anxious.jpg"
+              src="/Images/Anxious.jpg"
               data-mood="Anxious"
               onClick={scrollToTarget2} 
               className="img-fluid gallery-img mood-btn shadow-lg mb-1"
@@ -74,7 +74,7 @@ const MoodSelection = ({ref , scrollToTarget2 }) => {
           </div>
           <div className="col-6 col-lg-2 gallery-item cursor">
             <img
-              src="/public/Images/Sad.jpg"
+              src="/Images/Sad.jpg"
               data-mood="Sad"
               onClick={scrollToTarget2} 
               className="img-fluid  gallery-img mood-btn shadow-lg mb-1"
