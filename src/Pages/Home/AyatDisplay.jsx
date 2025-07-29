@@ -60,12 +60,11 @@ const AyatDisplay = React.memo(({ Ayat, getRandomAyat, FavoriteAyat,handleShow }
     if (!heart) {
       dispatch(AyatAction.addFavAyat(favAyat));
       toast.success("Ayat added to Favorites!");
-      // FavoriteAyat ? null : toast.success("Ayat added to Favorites!");
+   
     } else {
       
       dispatch(AyatAction.removeFavAyat(favAyat));
       toast.error("Ayat removed from Favorites!");
-      // FavoriteAyat ? null : toast.error("Ayat removed from Favorites!");
     }
   };
 

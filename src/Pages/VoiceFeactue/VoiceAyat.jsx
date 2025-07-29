@@ -144,9 +144,9 @@ const VoiceAyat = () => {
 
   return (
     <>
-   <div class="container-fluid bg-light py-2">
+   <div class="container-fluid bg-light py-1">
   <div class="marquee-container">
-    <p class="marquee-text text-center fw-bold text-success fs-2">
+    <p class="marquee-text text-center fw-bold text-success fs-4">
       🚧 Working on this Feature... Stay tuned! 🔧
     </p>
   </div>
@@ -169,23 +169,26 @@ const VoiceAyat = () => {
         {listening ? "Listening..." : "🎤 Speak Ayat"}
         <br />
         <h3>
-          {matchedAyats.map((ayat, index) => (
-            <span
-              className="border border-black d-flex justify-content-center mb-3 p-5 gap-2 "
-              key={index}
-              onClick={() => PlayAyat(ayat.audio, index)}
-            >
-              {processText(ayat.text)}
-              {activeIndex === index ? (
-                <FaPause className="fs-2 cursor " />
-              ) : (
-                <FaPlay className="cursor fs-2" />
-              )}
-              <br />
-            </span>
-          ))}
-        </h3>
-      </div>
+  {matchedAyats.map((ayat, index) => (
+    <div
+      key={index}
+      className="ayat-card d-flex align-items-center justify-content-between p-4 mb-4 rounded shadow-sm"
+      onClick={() => PlayAyat(ayat.audio, index)}
+    >
+      <span className="ayat-text flex-grow-1 me-3">
+        {processText(ayat.text)}
+      </span>
+      <span style={{color:"#5e17eb"}} className="play-icon  fs-3">
+        {activeIndex === index ? (
+          <FaPause className="cursor" />
+        ) : (
+          <FaPlay className="cursor" />
+        )}
+      </span>
+    </div>
+  ))}
+</h3>
+</div>
     </div>
     </>
   );

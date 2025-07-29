@@ -836,7 +836,7 @@ color: #6f2dbd;
 .marquee-container {
   width: 100%;
   overflow: hidden;
-  background-color: #f8f9fa; /* Light background for contrast */
+  background-color: #f8f9fa; 
   padding: 10px 0;
 }
 
@@ -853,4 +853,34 @@ color: #6f2dbd;
   100% {
     transform: translateX(-100%);
   }
+}
+
+.ayat-card {
+  border: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.ayat-card:hover {
+  background-color: #e9ecef;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  transform: scale(1.01);
+}
+
+.ayat-text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #212529;
+}
+
+.play-icon .cursor {
+  transition: transform 0.2s ease;
+}
+
+.play-icon .cursor:hover {
+  transform: scale(1.2);
+}
+.bg-purple {
+  background-color: #6f42c1; /* Bootstrap's purple-ish tone */
 }
